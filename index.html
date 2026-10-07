@@ -9,6 +9,15 @@
  <link rel="stylesheet" href="styles.css"><script type="module" src="src/app.js"></script>
 </head>
 <body>
+<svg class="art-filters" aria-hidden="true" focusable="false" width="0" height="0"><defs>
+ <filter id="ink-contours" color-interpolation-filters="sRGB" x="-2%" y="-2%" width="104%" height="104%">
+  <feColorMatrix type="saturate" values="0"/>
+  <feGaussianBlur stdDeviation="1.1"/>
+  <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1" bias="0" preserveAlpha="true"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 .65 0 0 0 0 .45 0 0 0 0 .29 1 1 1 0 0"/>
+  <feComponentTransfer><feFuncA type="linear" slope="2.5" intercept="-.35"/></feComponentTransfer>
+ </filter>
+</defs></svg>
 <a href="#trabalhos" class="skip-link">Ir para os trabalhos</a>
 <header class="masthead">
  <a class="wordmark" href="#inicio" aria-label="Shimizu, início">SHIMIZU</a>
@@ -20,7 +29,7 @@
  <section id="inicio" class="portal-sequence" aria-label="Portal Shimizu">
   <h1 class="sr-only">Shimizu. Arte, corpo e existência.</h1>
   <div class="portal-sticky">
-   <div class="portal-reveal" aria-hidden="true"><img src="assets/art/hero-sleeve.webp" alt=""><div class="arrival-title"><span class="section-number">01</span><span>TRABALHOS</span></div></div>
+   <div class="portal-reveal" aria-hidden="true"><img src="assets/art/flowers.webp" alt=""><div class="arrival-title"><span class="section-number">01</span><span>TRABALHOS</span></div></div>
    <div class="scene">
     <div class="scene-camera">
      <picture class="environment"><source media="(max-width:600px)" srcset="assets/torii-mobile.webp"><img src="assets/torii-v2.webp" alt="" fetchpriority="high"></picture>
@@ -39,10 +48,10 @@
   </div>
  </section>
  <section id="trabalhos" class="chapter works-section" aria-labelledby="works-title">
-  <div class="work-hero"><img id="work-image" src="assets/art/hero-sleeve.webp" alt="Braço tatuado com figura feminina oriental, flores vermelhas e carpa" loading="lazy"></div>
+  <div class="work-hero"><img id="work-image" src="assets/art/flowers.webp" alt="Tatuagem de figuras femininas com flores vermelhas no antebraço" loading="lazy"></div>
   <div class="section-heading"><span class="section-number">01</span><h2 id="works-title">TRABALHOS</h2><span class="fine-rule"></span><p>TATUAGENS COMO<br>EXTENSÃO DA EXISTÊNCIA.</p><span class="seal" aria-hidden="true">S</span></div>
   <div class="work-fragments" aria-label="Selecionar trabalho"><button data-work-select="1" aria-label="Ver composição na lateral do corpo"><img src="assets/art/composition.webp" alt="" loading="lazy"></button><button data-work-select="4" aria-label="Ver tatuagem de tigre"><img src="assets/art/tiger.webp" alt="" loading="lazy"></button><button data-work-select="2" aria-label="Ver composição de braço"><img src="assets/art/sleeve.webp" alt="" loading="lazy"></button></div>
-  <div class="work-navigation"><span class="work-count" aria-live="polite">01 / 08</span><span class="work-title">Corpo em composição</span><div><button data-work="-1" aria-label="Trabalho anterior">ANTERIOR</button><button data-work="1" aria-label="Próximo trabalho">PRÓXIMO<span class="line-arrow" aria-hidden="true"></span></button></div></div>
+  <div class="work-navigation"><span class="work-count" aria-live="polite">01 / 08</span><span class="work-title">Entre flores</span><div><button data-work="-1" aria-label="Trabalho anterior">ANTERIOR</button><button data-work="1" aria-label="Próximo trabalho">PRÓXIMO<span class="line-arrow" aria-hidden="true"></span></button></div></div>
  </section>
  <section id="artista" class="chapter artist-section" aria-labelledby="artist-title">
   <div class="artist-photo" role="img" aria-label="Shimizu apresentando um desenho, em fotografia fornecida do seu perfil"></div>

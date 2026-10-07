@@ -7,10 +7,10 @@ export const chapters = [
 ];
 export const instagram = 'https://www.instagram.com/shimizumo/';
 export const works = [
-  {image:'hero-sleeve',title:'Corpo em composição',detail:'Figura, flores e movimento',alt:'Braço tatuado com figura feminina oriental, flores vermelhas e carpa'},
+  {image:'flowers',title:'Entre flores',detail:'Vermelho sobre a pele',alt:'Tatuagem de figuras femininas com flores vermelhas no antebraço'},
   {image:'composition',title:'Presença e contraste',detail:'Figura e formas orgânicas',alt:'Composição de tatuagem na lateral do corpo, com figura feminina, flores e caveiras'},
   {image:'sleeve',title:'Uma segunda pele',detail:'Composição de braço',alt:'Manga oriental com grandes massas pretas, figura feminina e flores'},
-  {image:'flowers',title:'Entre flores',detail:'Vermelho sobre a pele',alt:'Tatuagem de figuras femininas com flores vermelhas no antebraço'},
+  {image:'hero-sleeve',title:'Corpo em composição',detail:'Figura, flores e movimento',alt:'Braço tatuado com figura feminina oriental, flores vermelhas e carpa'},
   {image:'tiger',title:'Força em movimento',detail:'Preto e espaço negativo',alt:'Tatuagem de tigre em preto e cinza com manchas ornamentais'},
   {image:'figure',title:'Gesto e silêncio',detail:'Figura feminina',alt:'Figura feminina oriental tatuada com longos cabelos pretos e acentos vermelhos'},
   {image:'face',title:'Dupla presença',detail:'Figura e tigre',alt:'Rosto feminino entrelaçado com rosto de tigre em tatuagem oriental'},

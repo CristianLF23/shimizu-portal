@@ -23,6 +23,7 @@ function paint(){
  const y=window.scrollY,p=clamp((y-portalStart)/portalTravel);
  let active=0;for(let i=0;i<geometry.length;i++)if(y+innerHeight*.36>=geometry[i])active=i;
  wind.setRegion(active);wind.progress=p;
+ document.body.dataset.chapter=sections[active].id;
  const reduced=wind.reduced.matches;
  document.documentElement.classList.toggle('reduced-motion',reduced);
  if(!reduced){

@@ -1,4 +1,4 @@
-# SHIMIZU · Portal V2
+# SHIMIZU · Portal V2.1
 
 Refatoração do projeto original para uma experiência de rolagem vertical contínua, seguindo o novo briefing de 07/10/2026. V1 preservada na entrega anterior.
 
@@ -10,7 +10,7 @@ Sem instalar pacotes. Requer Node.js apenas para servir localmente.
 npm start
 ```
 
-Abra http://127.0.0.1:4177/?v=2. Se o servidor já estiver rodando, basta atualizar o navegador.
+Abra http://127.0.0.1:4177/?v=2.1. Se o servidor já estiver rodando, basta atualizar o navegador.
 
 ```text
 npm run check
@@ -41,7 +41,7 @@ Mesma stack HTML/CSS/ES modules, fonte Cormorant Garamond local, fotografias e d
 - src/wind.js: intensidade, turbulência, mola, amortecimento, paralaxe e partículas.
 - assets/art: imagens reais fornecidas.
 - assets/torii-v2.webp e assets/torii-mobile.webp: cenários ilustrativos.
-- qa/artifacts-continuous: evidências e capturas da V2.
+- qa/artifacts-fidelity: evidências e capturas da V2.
 - project-docs: decisões, proveniência e limitações.
 
 ## Fidelidade e conteúdo
@@ -53,5 +53,6 @@ Não foram inventados endereço, preços, biografia, premiações, clientes ou d
 Fontes sob SIL OFL em assets/fonts/OFL.txt. Não há serviços externos, analytics, CMS, coleta de dados ou áudio em tempo de execução. A conversão abre apenas o Instagram. Cenário ilustrativo, sem alegação de representar o local de trabalho real.
 
 A validação automatizada usa Chromium local. Safari real, aparelhos físicos e taxa medida de 60 fps não estão certificados.
+
 
 
