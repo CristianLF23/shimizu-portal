@@ -176,8 +176,8 @@ body[data-chapter]:not([data-chapter="inicio"]) .masthead{background:#080908f2}
 .process-steps li>span{flex-shrink:0;padding-top:1px}
 .process-steps li p{font:12px/1.6 Arial,sans-serif;letter-spacing:.015em;color:#afa28f;margin:8px 0 0;max-width:230px}
 .process-note{bottom:4%;color:#978a77}
-.process-session{position:absolute;left:37%;right:0;bottom:0;height:29%;margin:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 14%),linear-gradient(0deg,transparent,black 18% 88%,transparent);mask-composite:intersect}
-.process-session img{width:100%;height:100%;object-fit:cover;object-position:50% 36%;filter:grayscale(.7) brightness(.49) contrast(1.15)}
+.process-session{position:absolute;left:37%;right:0;bottom:0;height:29%;margin:0;overflow:hidden}
+.process-session img{width:100%;height:100%;object-fit:cover;object-position:50% 36%;filter:grayscale(.7) brightness(.49) contrast(1.15);mask-image:linear-gradient(90deg,transparent,black 14%),linear-gradient(0deg,transparent,black 18% 88%,transparent);mask-composite:intersect}
 .process-session figcaption{position:absolute;left:7%;bottom:12%;color:#d4c7b5;text-shadow:0 2px 12px #000}
 .process-session figcaption span{font:9px Arial,sans-serif;letter-spacing:.17em}
 .process-session figcaption p{font:300 28px var(--serif);margin:10px 0 0}
@@ -220,8 +220,8 @@ body[data-chapter]:not([data-chapter="inicio"]) .masthead{background:#080908f2}
  .process-steps li{font-size:10px;padding:15px 0;gap:22px}
  .process-steps li p{font-size:12px;max-width:none;margin-top:8px}
  .process-note{display:none}
- .process-session{position:relative;left:auto;right:auto;bottom:auto;height:44svh;margin:27px 0 0;mask-image:linear-gradient(0deg,transparent,black 20% 80%,transparent)}
- .process-session img{object-position:50% 38%;filter:grayscale(.7) brightness(.47) contrast(1.12)}
+ .process-session{position:relative;left:auto;right:auto;bottom:auto;height:44svh;margin:27px 0 0}
+ .process-session img{object-position:50% 38%;filter:grayscale(.7) brightness(.47) contrast(1.12);mask-image:linear-gradient(0deg,transparent,black 20% 80%,transparent)}
  .process-session figcaption{bottom:14%;left:7%}.process-session figcaption p{font-size:26px}
  .oriental-section{height:auto;min-height:0;max-height:none;padding-top:65svh;padding-bottom:43px}
  .oriental-art{top:0;bottom:auto;height:72svh;opacity:.72}
