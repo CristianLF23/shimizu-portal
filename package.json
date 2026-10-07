@@ -1,5 +1,5 @@
 {
-  "name": "shimizu-portal", "version": "3.3.0", "private": true,
+  "name": "shimizu-portal", "version": "3.4.0", "private": true,
   "type": "module",
   "scripts": {"start": "node tools/server.mjs", "build": "node tools/build.mjs", "check": "node --check src/app.js && node --check src/wind.js && node --check src/cloth.js && node --check src/content.js"}
 }

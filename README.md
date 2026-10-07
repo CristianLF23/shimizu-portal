@@ -1,4 +1,4 @@
-# SHIMIZU · Portal V3.3
+# SHIMIZU · Portal V3.4
 
 Refatoração visual do mesmo projeto a partir do novo mockup mobile de 07/10/2026. Seis composições de uma tela cada, em uma única página vertical contínua. Versões anteriores preservadas nas entregas.
 
@@ -10,12 +10,12 @@ Sem instalar pacotes. Requer Node.js apenas para servir localmente.
 npm start
 ```
 
-Abra http://127.0.0.1:4177/?v=3.3. Se o servidor já estiver rodando, basta atualizar o navegador.
+Abra http://127.0.0.1:4177/?v=3.4. Se o servidor já estiver rodando, basta atualizar o navegador.
 
 ```text
 npm run check
 npm run build
-node qa/v3.3-qa.mjs
+node qa/v3.4-qa.mjs
 ```
 
 Site online: https://cristianlf23.github.io/shimizu-portal/. Publicado pelo GitHub Pages a partir da branch main. A pasta dist contém os arquivos estáticos para outras hospedagens. Abrir index.html por file:// não executa os módulos; use o servidor HTTP acima.
@@ -64,3 +64,5 @@ A validação automatizada usa Chromium local. Safari real, aparelhos físicos e
 V3.2: menu em gaveta pela direita com fechamento animado e backdrop. Home com 36 pétalas no celular e 60 no desktop, queda 50% mais rápida; pausa e movimento reduzido preservados.
 
 V3.3: botão persistente de WhatsApp, parágrafos de 18 a 24 px no desktop, legendas de 16 px e navegação ampliada. Galerias e textos reservam espaço para o botão flutuante. A tipografia se adapta também a telas de pouca altura, mantendo cada capítulo dentro de uma tela.
+
+V3.4: fotos de tatuagens sem dessaturação e retrato com grayscale de 10%, conservando a luz quente. Sequência abre em 01/09 com a manga dominante. Disponíveis usa uma superfície com folhas posicionadas individualmente, proporções nominais 54/46, alturas e rotações diferentes, pequenas sobreposições das margens e desenhos completos. WhatsApp é o botão vermelho primário em Contato, Instagram fica secundário; o botão persistente usa o mesmo vermelho e marfim do site.

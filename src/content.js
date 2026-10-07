@@ -9,15 +9,15 @@ export const instagram = 'https://www.instagram.com/shimizumo/';
 // Only enable the direct WhatsApp link after the artist's number is confirmed.
 export const whatsappNumber = '5511953717745';
 export const works = [
-  {image:'flowers',title:'Entre flores',detail:'Vermelho sobre a pele',alt:'Tatuagem de figuras femininas com flores vermelhas no antebraço'},
-  {image:'composition',title:'Presença e contraste',detail:'Figura e formas orgânicas',alt:'Composição de tatuagem na lateral do corpo, com figura feminina, flores e caveiras'},
-  {image:'sleeve',title:'Uma segunda pele',detail:'Composição de braço',alt:'Manga oriental com grandes massas pretas, figura feminina e flores'},
-  {image:'hero-sleeve',title:'Corpo em composição',detail:'Figura, flores e movimento',alt:'Braço tatuado com figura feminina oriental, flores vermelhas e carpa'},
-  {image:'tiger',title:'Força em movimento',detail:'Preto e espaço negativo',alt:'Tatuagem de tigre em preto e cinza com manchas ornamentais'},
-  {image:'figure',title:'Gesto e silêncio',detail:'Figura feminina',alt:'Figura feminina oriental tatuada com longos cabelos pretos e acentos vermelhos'},
-  {image:'face',title:'Dupla presença',detail:'Figura e tigre',alt:'Rosto feminino entrelaçado com rosto de tigre em tatuagem oriental'},
-  {image:'botanical',title:'Ritmo orgânico',detail:'Flores e anatomia',alt:'Manga em preto e cinza com peônias e composição botânica'},
-  {image:'color-tiger',title:'Cor e força',detail:'Tigre, flor e laços azuis',alt:'Tatuagem de tigre com flor vermelha e laços azuis no braço'}
+  {position:'40% 40%',image:'sleeve',title:'Uma segunda pele',detail:'Composição de braço',alt:'Manga oriental com grandes massas pretas, figura feminina e flores'},
+  {position:'42% 38%',image:'hero-sleeve',title:'Corpo em composição',detail:'Figura, flores e movimento',alt:'Braço tatuado com figura feminina oriental, flores vermelhas e carpa'},
+  {position:'50% 38%',image:'composition',title:'Presença e contraste',detail:'Figura e formas orgânicas',alt:'Composição de tatuagem na lateral do corpo, com figura feminina, flores e caveiras'},
+  {position:'48% 39%',image:'flowers',title:'Entre flores',detail:'Vermelho sobre a pele',alt:'Tatuagem de figuras femininas com flores vermelhas no antebraço'},
+  {position:'48% 47%',image:'figure',title:'Gesto e silêncio',detail:'Figura feminina',alt:'Figura feminina oriental tatuada com longos cabelos pretos e acentos vermelhos'},
+  {position:'50% 43%',image:'tiger',title:'Força em movimento',detail:'Preto e espaço negativo',alt:'Tatuagem de tigre em preto e cinza com manchas ornamentais'},
+  {position:'49% 45%',image:'face',title:'Dupla presença',detail:'Figura e tigre',alt:'Rosto feminino entrelaçado com rosto de tigre em tatuagem oriental'},
+  {position:'52% 37%',image:'botanical',title:'Ritmo orgânico',detail:'Flores e anatomia',alt:'Manga em preto e cinza com peônias e composição botânica'},
+  {position:'50% 43%',image:'color-tiger',title:'Cor e força',detail:'Tigre, flor e laços azuis',alt:'Tatuagem de tigre com flor vermelha e laços azuis no braço'}
 ];
 export const availableDesigns = [
   {name:'Figura e dragão',image:'study-dragon',alt:'Desenho original de figura feminina entre dragões no papel',text:'Figura e dragão. Consulte tamanho, região do corpo e disponibilidade.'},

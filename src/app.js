@@ -1,12 +1,12 @@
-import {chapters,works,whatsappNumber} from './content.js?v=3.3';
-import {WindSystem,motionConfig} from './wind.js?v=3.3';
+import {chapters,works,whatsappNumber} from './content.js?v=3.4';
+import {WindSystem,motionConfig} from './wind.js?v=3.4';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
 const scroller=$('#experience');
 const sequence=$('.portal-sequence'),camera=$('.scene-camera');
 const sections=[$('#inicio'),...chapters.map(c=>document.getElementById(c.id))];
-let geometry=[],portalStart=0,portalTravel=1,queued=false,workIndex=2,menuOpen=false;
+let geometry=[],portalStart=0,portalTravel=1,queued=false,workIndex=0,menuOpen=false;
 const clamp=v=>Math.max(0,Math.min(1,v));
 const motionButton=$('#motion-toggle');
 const menu=$('#chapter-index'),menuButton=$('.index-toggle');
@@ -84,7 +84,7 @@ motionButton.addEventListener('click',()=>{if(!wind.reduced.matches)wind.toggle(
 function showWork(index){
  workIndex=(index+works.length)%works.length;const w=works[workIndex],img=$('#work-image');
  img.src='assets/art/'+w.image+'.webp';img.alt=w.alt;
- const positions=['48% 39%','50% 38%','40% 40%','42% 38%','50% 43%','48% 47%','49% 45%','52% 37%','50% 43%'];img.style.objectPosition=positions[workIndex];
+ img.style.objectPosition=w.position;
  $('.work-count').textContent=String(workIndex+1).padStart(2,'0')+' / '+String(works.length).padStart(2,'0');
  $('.work-title').textContent=w.title;
  document.querySelectorAll('[data-work-select]').forEach(b=>{if(Number(b.dataset.workSelect)===workIndex)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});
