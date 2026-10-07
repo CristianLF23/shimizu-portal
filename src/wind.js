@@ -1,5 +1,5 @@
-import {ClothFlag} from './cloth.js?v=3.1';
-export const motionConfig={intensity:.8,gustStrength:1.8,portalZoom:.02,particlesDesktop:24,particlesMobile:14};
+import {ClothFlag} from './cloth.js?v=3.2';
+export const motionConfig={intensity:.8,gustStrength:1.8,portalZoom:.02,particlesDesktop:60,particlesMobile:36,petalFallRate:1.5};
 export class WindSystem {
  constructor(scene){
   this.scene=scene;this.environment=scene.querySelector('.environment');this.backdrop=this.environment.querySelector('img');
@@ -47,7 +47,7 @@ export class WindSystem {
   if(!this.mobile.matches||!this.lastDraw||now-this.lastDraw>=30){for(const flag of this.objects)flag.draw();this.lastDraw=now;}
   const count=this.mobile.matches?motionConfig.particlesMobile:motionConfig.particlesDesktop;
   for(let i=0;i<this.petals.length;i++){
-   const p=this.petals[i];p.el.hidden=i>=count;if(i>=count)continue;p.x+=dt*(.018+breeze*.018)*p.depth;p.y+=dt*p.speed*p.depth;
+   const p=this.petals[i];p.el.hidden=i>=count;if(i>=count)continue;p.x+=dt*(.018+breeze*.018)*p.depth;p.y+=dt*p.speed*p.depth*motionConfig.petalFallRate;
    if(p.y>1.06){p.y=-.06;p.x=(i*.193+t*.087)%1;}if(p.x>1.1)p.x=-.1;if(p.x<-.1)p.x=1.1;
    const flutter=Math.sin(t*1.6+p.phase),x=p.x*this.scene.clientWidth+Math.sin(t*.8+p.phase)*28;
    p.el.style.transform=`translate3d(${x.toFixed(1)}px,${(p.y*this.scene.clientHeight+flutter*13).toFixed(1)}px,0) rotate(${(t*35+p.phase*80).toFixed(1)}deg) rotateY(${(flutter*70).toFixed(1)}deg) scale(${p.depth})`;
