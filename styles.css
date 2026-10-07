@@ -178,7 +178,7 @@ body[data-chapter]:not([data-chapter="inicio"]) .masthead{background:#080908f2}
 .process-note{bottom:4%;color:#978a77}
 .process-session{position:absolute;left:37%;right:0;bottom:0;height:29%;margin:0;overflow:hidden}
 .process-session img{width:100%;height:100%;object-fit:cover;object-position:50% 36%;filter:grayscale(.7) brightness(.49) contrast(1.15);mask-image:linear-gradient(90deg,transparent,black 14%),linear-gradient(0deg,transparent,black 18% 88%,transparent);mask-composite:intersect}
-.process-session figcaption{position:absolute;left:7%;bottom:12%;color:#d4c7b5;text-shadow:0 2px 12px #000}
+.process-session figcaption{position:absolute;left:7%;bottom:12%;z-index:5;color:#d4c7b5;text-shadow:0 2px 12px #000}
 .process-session figcaption span{font:9px Arial,sans-serif;letter-spacing:.17em}
 .process-session figcaption p{font:300 28px var(--serif);margin:10px 0 0}
 .oriental-art{opacity:.72}
