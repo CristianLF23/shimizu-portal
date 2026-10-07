@@ -1,5 +1,5 @@
-import {chapters,works,whatsappNumber} from './content.js?v=3.2';
-import {WindSystem,motionConfig} from './wind.js?v=3.2';
+import {chapters,works,whatsappNumber} from './content.js?v=3.3';
+import {WindSystem,motionConfig} from './wind.js?v=3.3';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
@@ -60,13 +60,13 @@ const backdrop=$('#menu-backdrop');let menuCloseTimer;
 function finishMenuClose(){if(!menuOpen){menu.hidden=true;backdrop.hidden=true;}}
 function closeMenu(restore=true){
  menuOpen=false;menu.inert=true;menu.setAttribute('aria-hidden','true');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menu');
- document.body.classList.remove('menu-open');$('.desktop-nav').inert=false;scroller.inert=false;$('.site-footer').inert=false;
+ document.body.classList.remove('menu-open');$('.desktop-nav').inert=false;scroller.inert=false;$('.site-footer').inert=false;$('#whatsapp-floating').inert=false;
  clearTimeout(menuCloseTimer);if(wind.reduced.matches)finishMenuClose();else menuCloseTimer=setTimeout(finishMenuClose,380);
  if(restore)menuButton.focus({preventScroll:true});
 }
 menu.addEventListener('transitionend',e=>{if(e.target===menu&&e.propertyName==='transform')finishMenuClose();});
 backdrop.addEventListener('click',()=>closeMenu());
-menuButton.addEventListener('click',()=>{if(menuOpen){closeMenu();return;}menuOpen=true;clearTimeout(menuCloseTimer);menu.hidden=false;backdrop.hidden=false;menu.inert=false;menu.removeAttribute('aria-hidden');menu.getBoundingClientRect();menuButton.setAttribute('aria-expanded','true');menuButton.setAttribute('aria-label','Fechar menu');document.body.classList.add('menu-open');$('.desktop-nav').inert=true;$('#experience').inert=true;$('.site-footer').inert=true;menu.querySelector('a').focus({preventScroll:true});});
+menuButton.addEventListener('click',()=>{if(menuOpen){closeMenu();return;}menuOpen=true;clearTimeout(menuCloseTimer);menu.hidden=false;backdrop.hidden=false;menu.inert=false;menu.removeAttribute('aria-hidden');menu.getBoundingClientRect();menuButton.setAttribute('aria-expanded','true');menuButton.setAttribute('aria-label','Fechar menu');document.body.classList.add('menu-open');$('.desktop-nav').inert=true;$('#experience').inert=true;$('.site-footer').inert=true;$('#whatsapp-floating').inert=true;menu.querySelector('a').focus({preventScroll:true});});
 menu.addEventListener('click',e=>{const link=e.target.closest('a');if(!link)return;closeMenu(false);const section=document.querySelector(link.hash);if(section){section.setAttribute('tabindex','-1');section.focus({preventScroll:true});}});
 document.addEventListener('keydown',e=>{
  if(menuOpen&&e.key==='Escape'){e.preventDefault();closeMenu();}

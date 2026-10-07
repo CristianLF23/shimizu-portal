@@ -1,4 +1,4 @@
-# SHIMIZU · Portal V3.2
+# SHIMIZU · Portal V3.3
 
 Refatoração visual do mesmo projeto a partir do novo mockup mobile de 07/10/2026. Seis composições de uma tela cada, em uma única página vertical contínua. Versões anteriores preservadas nas entregas.
 
@@ -10,12 +10,12 @@ Sem instalar pacotes. Requer Node.js apenas para servir localmente.
 npm start
 ```
 
-Abra http://127.0.0.1:4177/?v=3.2. Se o servidor já estiver rodando, basta atualizar o navegador.
+Abra http://127.0.0.1:4177/?v=3.3. Se o servidor já estiver rodando, basta atualizar o navegador.
 
 ```text
 npm run check
 npm run build
-node qa/v3.2-qa.mjs
+node qa/v3.3-qa.mjs
 ```
 
 Site online: https://cristianlf23.github.io/shimizu-portal/. Publicado pelo GitHub Pages a partir da branch main. A pasta dist contém os arquivos estáticos para outras hospedagens. Abrir index.html por file:// não executa os módulos; use o servidor HTTP acima.
@@ -26,7 +26,7 @@ A rolagem vertical passa entre seis dobras completas: Home, Trabalhos, A artista
 
 Trabalhos preserva nove fotografias reais: imagem dominante, três detalhes visíveis por vez, sequência horizontal, seleção, teclado e swipe. Setas laterais sempre visíveis, contador e indicação de mais trabalhos tornam a sequência clara. Disponíveis apresenta quatro estudos originais como folhas físicas; o botão alterna para os três restantes na mesma dobra. A rolagem horizontal também funciona sem JavaScript. As folhas abrem seus arquivos originais. A disponibilidade comercial deve ser confirmada com a artista.
 
-O menu contém o controle de pausa do movimento. Movimento reduzido desativa vento, partículas e câmera; a composição permanece. Não há interceptação de wheel/touch, pin ou transição entre páginas. O Instagram real @shimizumo permanece ativo. O WhatsApp confirmado +55 11 95371 7745 está ativo em Contato, com mensagem de abertura sobre tatuagem. Nenhuma mensagem é enviada automaticamente, e o link também funciona sem JavaScript.
+O menu contém o controle de pausa do movimento. Movimento reduzido desativa vento, partículas e câmera; a composição permanece. Não há interceptação de wheel/touch, pin ou transição entre páginas. O Instagram real @shimizumo permanece ativo. O WhatsApp confirmado +55 11 95371 7745 está ativo em Contato e no botão persistente de todas as seis dobras, com mensagem de abertura sobre tatuagem. O botão persistente tem ícone no celular e texto no desktop. Durante o menu modal, ele fica oculto e fora do foco; retorna ao fechar a gaveta. Nenhuma mensagem é enviada automaticamente, e o link também funciona sem JavaScript.
 
 ## O que foi reaproveitado
 
@@ -62,3 +62,5 @@ A validação automatizada usa Chromium local. Safari real, aparelhos físicos e
 
 
 V3.2: menu em gaveta pela direita com fechamento animado e backdrop. Home com 36 pétalas no celular e 60 no desktop, queda 50% mais rápida; pausa e movimento reduzido preservados.
+
+V3.3: botão persistente de WhatsApp, parágrafos de 18 a 24 px no desktop, legendas de 16 px e navegação ampliada. Galerias e textos reservam espaço para o botão flutuante. A tipografia se adapta também a telas de pouca altura, mantendo cada capítulo dentro de uma tela.
