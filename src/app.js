@@ -1,4 +1,4 @@
-import {chapters,works,themes} from './content.js?v=2.1';
+import {chapters,works,themes} from './content.js?v=2.2';
 import {WindSystem,motionConfig} from './wind.js';
 
 const $=s=>document.querySelector(s);
