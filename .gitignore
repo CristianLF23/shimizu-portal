@@ -1,0 +1,10 @@
+dist/
+qa/
+project-docs/
+assets/**/*.png
+assets/*.png
+node_modules/
+.env
+.env.*
+*.zip
+tools/package-delivery.py
