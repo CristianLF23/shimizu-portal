@@ -1,4 +1,4 @@
-# SHIMIZU · Portal V2.3
+# SHIMIZU · Portal V2.4
 
 Refatoração do projeto original para uma experiência de rolagem vertical contínua, seguindo o novo briefing de 07/10/2026. V1 preservada na entrega anterior.
 
@@ -10,7 +10,7 @@ Sem instalar pacotes. Requer Node.js apenas para servir localmente.
 npm start
 ```
 
-Abra http://127.0.0.1:4177/?v=2.3. Se o servidor já estiver rodando, basta atualizar o navegador.
+Abra http://127.0.0.1:4177/?v=2.4. Se o servidor já estiver rodando, basta atualizar o navegador.
 
 ```text
 npm run check
@@ -40,13 +40,13 @@ Mesma stack HTML/CSS/ES modules, fonte Cormorant Garamond local, fotografias e d
 - src/app.js: direção do scroll, galeria, menu e âncoras.
 - src/wind.js: intensidade, turbulência, mola, amortecimento, paralaxe e partículas.
 - assets/art: imagens reais fornecidas.
-- assets/torii-v2.webp e assets/torii-mobile.webp: cenários ilustrativos.
-- qa/artifacts-portfolio: evidências e capturas da V2.
+- assets/torii-illustrated.webp e assets/torii-illustrated-mobile.webp: cenários ilustrativos em composições horizontal e vertical.
+- qa/artifacts-illustrated: evidências e capturas da V2.4.
 - project-docs: decisões, proveniência e limitações.
 
 ## Fidelidade e conteúdo
 
-Referência 01 define arquitetura, ordem e continuidade; Referência 02 refina recortes, contrastes e tipografia. O cenário foi refeito para camadas funcionais. Nenhuma tatuagem gerada das pranchas foi atribuída à artista.
+Referência 01 define arquitetura, ordem e continuidade; Referência 02 refina recortes, contrastes e tipografia. A primeira dobra foi remodelada como ilustração em tinta, com torii vermelho, névoa clara, montanhas e textura de papel. O escurecimento foi concentrado nas áreas de texto; a imagem do cenário não recebe filtro de luminosidade. Os três papéis mantêm desenhos reais da artista em camadas funcionais. Nenhuma tatuagem gerada das pranchas foi atribuída à artista.
 
 Não foram inventados endereço, preços, biografia, premiações, clientes ou depoimentos. O retrato principal usa a segunda fotografia real enviada em 07/10/2026, preparando a máquina. As outras fotos entram em Processo e no cotidiano do estúdio. Os novos textos são rascunhos editoriais autorizados pelo usuário, sujeitos a revisão pela artista; não acrescentam fatos biográficos, preços ou alegações comerciais. O tratamento negativo foi removido; os desenhos aparecem no papel original. A galeria inclui a nova foto do tigre colorido.
 

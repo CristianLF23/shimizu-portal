@@ -1,5 +1,5 @@
-import {chapters,works,availableDesigns} from './content.js?v=2.3';
-import {WindSystem,motionConfig} from './wind.js?v=2.3';
+import {chapters,works,availableDesigns} from './content.js?v=2.4';
+import {WindSystem,motionConfig} from './wind.js?v=2.4';
 
 const $=s=>document.querySelector(s);
 const wind=new WindSystem($('.scene'));
