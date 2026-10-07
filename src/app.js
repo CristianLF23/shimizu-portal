@@ -1,5 +1,5 @@
-import {chapters,works,themes} from './content.js?v=2.2';
-import {WindSystem,motionConfig} from './wind.js';
+import {chapters,works,availableDesigns} from './content.js?v=2.3';
+import {WindSystem,motionConfig} from './wind.js?v=2.3';
 
 const $=s=>document.querySelector(s);
 const wind=new WindSystem($('.scene'));
@@ -13,7 +13,7 @@ const motionButton=$('#motion-toggle');
 const menu=$('#chapter-index'),menuButton=$('.index-toggle');
 
 function measure(){
- portalStart=sequence.offsetTop;portalTravel=Math.max(1,sequence.offsetHeight-innerHeight);
+ portalStart=sequence.offsetTop;portalTravel=Math.max(1,sequence.offsetHeight);
  geometry=sections.map(s=>s.offsetTop);
  pageTravel=Math.max(1,document.documentElement.scrollHeight-innerHeight);
  requestPaint();
@@ -28,7 +28,7 @@ function paint(){
  document.documentElement.classList.toggle('reduced-motion',reduced);
  if(!reduced){
   camera.style.transform='translate3d('+(-p*8).toFixed(2)+'%,'+(-p*3).toFixed(2)+'%,0) scale('+(1+p*motionConfig.portalZoom).toFixed(3)+')';
-  scene.style.opacity=(1-interval(p,motionConfig.portalFadeStart,motionConfig.portalFadeEnd)).toFixed(3);
+  scene.style.opacity='1';
   homeCopy.style.opacity=(1-interval(p,.03,.28)).toFixed(3);
   homeBottom.style.opacity=homeCopy.style.opacity;
   const phase=interval(p,motionConfig.paperStart,motionConfig.paperEnd);
@@ -63,16 +63,16 @@ function showWork(index){
  img.src='assets/art/'+w.image+'.webp';img.alt=w.alt;
  $('.work-count').textContent=String(workIndex+1).padStart(2,'0')+' / '+String(works.length).padStart(2,'0');
  $('.work-title').textContent=w.title;
- document.querySelectorAll('[data-work-select]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.workSelect)===workIndex)));
- if(!wind.reduced.matches)img.animate([{opacity:.5,transform:'translateX(7px)'},{opacity:1,transform:'none'}],{duration:320,easing:'ease-out'});
+ document.querySelectorAll('[data-work-select]').forEach(b=>{if(Number(b.dataset.workSelect)===workIndex)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});
+ if(!wind.reduced.matches)img.animate([{opacity:.5,transform:'translateX(7px)'},{opacity:1,transform:'none'}],{duration:180,easing:'ease-out'});
  $('#page-status').textContent='Trabalho '+(workIndex+1)+' de '+works.length+': '+w.title;
 }
 document.querySelectorAll('[data-work]').forEach(b=>b.addEventListener('click',()=>showWork(workIndex+Number(b.dataset.work))));
-document.querySelectorAll('[data-work-select]').forEach(b=>b.addEventListener('click',()=>showWork(Number(b.dataset.workSelect))));
+document.querySelectorAll('[data-work-select]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showWork(Number(b.dataset.workSelect));if(innerWidth<=600&&$('.work-hero').getBoundingClientRect().bottom<100)$('#trabalhos').scrollIntoView({behavior:wind.reduced.matches?'instant':'smooth',block:'start'});}));
 $('#trabalhos').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();showWork(workIndex+(e.key==='ArrowRight'?1:-1));}});
 let touchX=0,touchY=0;
 $('.work-hero').addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY;},{passive:true});
 $('.work-hero').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.6)showWork(workIndex+(dx<0?1:-1));},{passive:true});
-document.querySelectorAll('[data-theme]').forEach(b=>b.addEventListener('click',()=>{const i=Number(b.dataset.theme),t=themes[i];$('.oriental-art img').src='assets/art/'+t.image+'.webp';$('.theme-description').textContent=t.text;document.querySelectorAll('[data-theme]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));$('#page-status').textContent=t.name;}));
+document.querySelectorAll('[data-design]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const t=availableDesigns[Number(b.dataset.design)],img=$('#available-image');img.src='assets/art/'+t.image+'.webp';img.alt=t.alt;$('.available-description').textContent=t.text;document.querySelectorAll('[data-design]').forEach(el=>{if(el===b)el.setAttribute('aria-current','true');else el.removeAttribute('aria-current');});$('#page-status').textContent=t.name;if(innerWidth<=600&&img.getBoundingClientRect().bottom<100)img.scrollIntoView({behavior:wind.reduced.matches?'instant':'smooth',block:'start'});}));
 updateMotion();measure();
 
