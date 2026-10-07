@@ -1,9 +1,9 @@
 export const motionConfig = {
-  intensity: .7, direction: 1, spring: 10, damping: 3.7,
-  gustStrength: 9, turbulence: .7, parallax: 5,
-  portalZoom: .35,
+  intensity: .3, direction: 1, spring: 10, damping: 3.7,
+  gustStrength: 2, turbulence: .2, parallax: 2,
+  portalZoom: .035,
   paperStart: .25, paperEnd: .94,
-  particlesDesktop: 16, particlesMobile: 7
+  particlesDesktop: 8, particlesMobile: 4
 };
 
 export class WindSystem {
