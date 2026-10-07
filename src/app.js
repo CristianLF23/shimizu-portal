@@ -1,8 +1,9 @@
-import {chapters,works} from './content.js?v=3.0';
-import {WindSystem,motionConfig} from './wind.js?v=3.0';
+import {chapters,works,whatsappNumber} from './content.js?v=3.1';
+import {WindSystem,motionConfig} from './wind.js?v=3.1';
 
 const $=s=>document.querySelector(s);
-const wind=new WindSystem($('.scene'));
+export const wind=new WindSystem($('.scene'));
+const scroller=$('#experience');
 const sequence=$('.portal-sequence'),camera=$('.scene-camera');
 const sections=[$('#inicio'),...chapters.map(c=>document.getElementById(c.id))];
 let geometry=[],portalStart=0,portalTravel=1,queued=false,workIndex=2,menuOpen=false;
@@ -11,14 +12,17 @@ const motionButton=$('#motion-toggle');
 const menu=$('#chapter-index'),menuButton=$('.index-toggle');
 
 function measure(){
+ const previousHeight=portalTravel,previousIndex=Math.round(scroller.scrollTop/previousHeight);
  portalStart=sequence.offsetTop;portalTravel=Math.max(1,sequence.offsetHeight);
  geometry=sections.map(s=>s.offsetTop);
+ if(previousHeight>1&&Math.abs(previousHeight-portalTravel)>1)scroller.scrollTo({top:geometry[Math.min(previousIndex,sections.length-1)],behavior:'instant'});
+ wind.mount();
  requestPaint();
 }
 function paint(){
  queued=false;
- const y=window.scrollY,p=clamp((y-portalStart)/portalTravel);
- let active=0;for(let i=0;i<geometry.length;i++)if(y+$('.masthead').offsetHeight+1>=geometry[i])active=i;
+ const y=scroller.scrollTop,p=clamp((y-portalStart)/portalTravel);
+ const active=Math.max(0,Math.min(sections.length-1,Math.round(y/portalTravel)));
  wind.setRegion(active);wind.progress=p*.25;
  document.body.dataset.chapter=sections[active].id;
  document.documentElement.classList.toggle('reduced-motion',wind.reduced.matches);
@@ -27,9 +31,28 @@ function paint(){
  document.querySelectorAll('.desktop-nav a').forEach(a=>{if(a.hash==='#'+sections[active].id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
 }
 function requestPaint(){if(!queued){queued=true;requestAnimationFrame(paint);}}
-addEventListener('scroll',requestPaint,{passive:true});
+let settleTimer,pointerDown=false;
+function settle(){
+ if(pointerDown||menuOpen||!geometry.length)return;
+ const nearest=geometry.reduce((a,b)=>Math.abs(b-scroller.scrollTop)<Math.abs(a-scroller.scrollTop)?b:a);
+ if(Math.abs(scroller.scrollTop-nearest)>1)scroller.scrollTo({top:nearest,behavior:wind.reduced.matches?'instant':'smooth'});
+}
+scroller.addEventListener('scroll',()=>{requestPaint();clearTimeout(settleTimer);settleTimer=setTimeout(settle,220);},{passive:true});
+scroller.addEventListener('scrollend',settle);
+scroller.addEventListener('pointerdown',()=>{pointerDown=true;},{passive:true});
+addEventListener('pointerup',()=>{pointerDown=false;clearTimeout(settleTimer);settleTimer=setTimeout(settle,220);},{passive:true});
+addEventListener('pointercancel',()=>{pointerDown=false;},{passive:true});
+function navigate(section,instant=false){scroller.scrollTo({top:section.offsetTop,behavior:instant||wind.reduced.matches?'instant':'smooth'});}
+document.addEventListener('click',e=>{
+ const link=e.target.closest('a[href^="#"]');if(!link)return;
+ const section=sections.find(s=>'#'+s.id===link.hash);if(!section)return;
+ e.preventDefault();if(menuOpen)closeMenu(false);
+ history.pushState(null,'',link.hash);navigate(section);section.setAttribute('tabindex','-1');section.focus({preventScroll:true});
+});
+function restoreHash(){const section=sections.find(s=>'#'+s.id===location.hash);if(section)navigate(section,true);}
+addEventListener('popstate',restoreHash);addEventListener('hashchange',restoreHash);
 let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{measure();},100);},{passive:true});
-const observer=new ResizeObserver(measure);sections.forEach(s=>observer.observe(s));
+const observer=new ResizeObserver(measure);observer.observe(scroller);
 document.fonts.ready.then(measure);
 addEventListener('load',measure,{once:true});
 
@@ -39,6 +62,12 @@ menu.addEventListener('click',e=>{const link=e.target.closest('a');if(!link)retu
 document.addEventListener('keydown',e=>{
  if(menuOpen&&e.key==='Escape'){e.preventDefault();closeMenu();}
  if(menuOpen&&e.key==='Tab'){const focusables=[menuButton,...menu.querySelectorAll('a,button')],i=focusables.indexOf(document.activeElement);if((e.shiftKey&&i<=0)||(!e.shiftKey&&i===focusables.length-1)){e.preventDefault();focusables[e.shiftKey?focusables.length-1:0].focus();}}
+ if(menuOpen||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target.closest('input,textarea,select,[contenteditable="true"]'))return;
+ const keys=['PageDown','PageUp','ArrowDown','ArrowUp','Home','End',' '];
+ if(!keys.includes(e.key)||(e.key===' '&&e.target.closest('a,button')))return;
+ e.preventDefault();const current=Math.round(scroller.scrollTop/portalTravel);
+ const index=e.key==='Home'?0:e.key==='End'?sections.length-1:current+(['PageUp','ArrowUp'].includes(e.key)||e.key===' '&&e.shiftKey?-1:1);
+ navigate(sections[Math.max(0,Math.min(sections.length-1,index))]);
 });
 function updateMotion(){const off=wind.paused||wind.reduced.matches;motionButton.textContent=wind.reduced.matches?'MOVIMENTO REDUZIDO':off?'ATIVAR MOVIMENTO':'PAUSAR MOVIMENTO';motionButton.setAttribute('aria-pressed',String(off));motionButton.setAttribute('aria-label',wind.reduced.matches?'Movimento reduzido pelo dispositivo':off?'Ativar movimento':'Pausar movimento');document.documentElement.classList.toggle('reduced-motion',wind.reduced.matches);measure();}
 motionButton.addEventListener('click',()=>{if(!wind.reduced.matches)wind.toggle();updateMotion();});wind.onChange=updateMotion;
@@ -65,5 +94,9 @@ function changeDesignGroup(){const next=Math.round(designs.scrollLeft/designs.cl
 designNext.addEventListener('click',changeDesignGroup);
 designs.addEventListener('keydown',e=>{if(e.target!==designs)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();changeDesignGroup();}});
 designs.addEventListener('scroll',()=>{const second=designs.scrollLeft>designs.clientWidth*.5;designNext.firstChild.textContent=second?'VER PRIMEIROS DISPONÍVEIS':'VER OUTROS DISPONÍVEIS';designNext.setAttribute('aria-label',second?'Ver primeiro conjunto de estudos':'Ver segundo conjunto de estudos');},{passive:true});
-updateMotion();measure();
+const whatsapp=$('#whatsapp-contact');
+if(/^\d{10,15}$/.test(whatsappNumber)){
+ whatsapp.href='https://wa.me/'+whatsappNumber+'?text='+encodeURIComponent('Olá, Shimizu! Gostaria de conversar sobre uma tatuagem.');whatsapp.hidden=false;
+}
+updateMotion();measure();restoreHash();
 

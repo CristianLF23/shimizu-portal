@@ -6,6 +6,8 @@ export const chapters = [
   {id:'contato', title:'Contato', eyebrow:'O PRÓXIMO CAPÍTULO', note:'Toda composição começa com uma conversa.'}
 ];
 export const instagram = 'https://www.instagram.com/shimizumo/';
+// Only enable the direct WhatsApp link after the artist's number is confirmed.
+export const whatsappNumber = '';
 export const works = [
   {image:'flowers',title:'Entre flores',detail:'Vermelho sobre a pele',alt:'Tatuagem de figuras femininas com flores vermelhas no antebraço'},
   {image:'composition',title:'Presença e contraste',detail:'Figura e formas orgânicas',alt:'Composição de tatuagem na lateral do corpo, com figura feminina, flores e caveiras'},
