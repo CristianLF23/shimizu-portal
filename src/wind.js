@@ -1,4 +1,4 @@
-import {ClothFlag} from './cloth.js?v=3.4';
+import {ClothFlag} from './cloth.js?v=4';
 export const motionConfig={intensity:.8,gustStrength:1.8,portalZoom:.02,particlesDesktop:60,particlesMobile:36,petalFallRate:1.5};
 export class WindSystem {
  constructor(scene){
@@ -38,7 +38,7 @@ export class WindSystem {
   cancelAnimationFrame(this.frame);this.frame=0;this.last=0;this.accumulator=0;
   const stopped=this.paused||this.reduced.matches;this.scene.classList.toggle('motion-paused',stopped);this.environment.style.transform='';
   if(stopped)for(const flag of this.objects)flag.reset();
-  if(!stopped&&!document.hidden&&this.region===0)this.frame=requestAnimationFrame(this.tick);
+  if(!stopped&&!document.hidden&&!document.body.classList.contains('menu-open')&&!document.querySelector('#art-viewer')?.open&&this.region===0)this.frame=requestAnimationFrame(this.tick);
  }
  tick(now){
   const dt=this.last?Math.min((now-this.last)/1000,.05):1/60;this.last=now;this.time+=dt;this.accumulator+=dt;this.impulse*=Math.exp(-dt*1.3);

@@ -1,68 +1,76 @@
-# SHIMIZU · Portal V3.4
+# SHIMIZU · Portal V4
 
-Refatoração visual do mesmo projeto a partir do novo mockup mobile de 07/10/2026. Seis composições de uma tela cada, em uma única página vertical contínua. Versões anteriores preservadas nas entregas.
+Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-## Abrir
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4
 
-Sem instalar pacotes. Requer Node.js apenas para servir localmente.
+## Executar
+
+Não exige instalação de pacotes. Node.js é usado apenas para o servidor local, verificação de sintaxe e build estático.
 
 ```text
 npm start
-```
-
-Abra http://127.0.0.1:4177/?v=3.4. Se o servidor já estiver rodando, basta atualizar o navegador.
-
-```text
 npm run check
 npm run build
-node qa/v3.4-qa.mjs
 ```
 
-Site online: https://cristianlf23.github.io/shimizu-portal/. Publicado pelo GitHub Pages a partir da branch main. A pasta dist contém os arquivos estáticos para outras hospedagens. Abrir index.html por file:// não executa os módulos; use o servidor HTTP acima.
+Abra http://127.0.0.1:4177/?v=4. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
-## Navegação
+## Experiência
 
-A rolagem vertical passa entre seis dobras completas: Home, Trabalhos, A artista, Processo, Disponíveis e Contato. Uma única área de rolagem contém as seis seções, cada uma ocupa exatamente 100dvh com fallback 100svh e alinhamento nativo de scroll, correção ao finalizar e preservação do capítulo ao redimensionar; nenhuma exige scroll vertical interno. O rodapé faz parte de Contato. Papéis da Home são cenográficos, sem texto de menu ou interatividade.
+- Bodoni Moda normal e itálica nos títulos; IBM Plex Sans Condensed na interface; Cormorant em detalhes editoriais. Fontes locais.
+- Portal com quatro bandeiras de tecido presas à viga, rajadas, pétalas, névoa, reflexos e reação sutil ao cursor. SOPRAR cria uma rajada e ondas na água.
+- Nove tatuagens, miniaturas, setas, teclado e swipe. OLHAR DE PERTO abre a fotografia completa, com navegação e consulta contextual pelo WhatsApp.
+- Retrato real e texto editorial sobre a relação entre desenho, observação e pele.
+- Cinco etapas clicáveis do Processo, cada uma revelando uma imagem autêntica da artista ou de seu trabalho.
+- Sete estudos disponíveis em dois conjuntos de folhas, com inclinação no cursor e visualização ampliada. Disponibilidade comercial sob consulta.
+- Menu em gaveta, índice lateral no desktop, retorno de foco, Escape e atalhos de navegação. WhatsApp persistente na paleta vermelha do site.
 
-Trabalhos preserva nove fotografias reais: imagem dominante, três detalhes visíveis por vez, sequência horizontal, seleção, teclado e swipe. Setas laterais sempre visíveis, contador e indicação de mais trabalhos tornam a sequência clara. Disponíveis apresenta quatro estudos originais como folhas físicas; o botão alterna para os três restantes na mesma dobra. A rolagem horizontal também funciona sem JavaScript. As folhas abrem seus arquivos originais. A disponibilidade comercial deve ser confirmada com a artista.
+Cada capítulo ocupa uma tela, com rolagem nativa e alinhamento ao término. Galerias usam o eixo horizontal. O explorador de arte é um diálogo sobre o capítulo atual e conserva sua posição ao fechar. Não há troca de página, autoplay da galeria, interceptação de wheel/touch ou rolagem virtual.
 
-O menu contém o controle de pausa do movimento. Movimento reduzido desativa vento, partículas e câmera; a composição permanece. Não há interceptação de wheel/touch, pin ou transição entre páginas. O Instagram real @shimizumo permanece ativo. O WhatsApp confirmado +55 11 95371 7745 está ativo em Contato e no botão persistente de todas as seis dobras, com mensagem de abertura sobre tatuagem. O botão persistente tem ícone no celular e texto no desktop. Durante o menu modal, ele fica oculto e fora do foco; retorna ao fechar a gaveta. Nenhuma mensagem é enviada automaticamente, e o link também funciona sem JavaScript.
+O menu permite pausar os efeitos. Movimento reduzido, aba oculta e saída da Home interrompem a cena animada. A atmosfera usa Canvas 2D, DPR limitado a 1,5 e desenho reduzido para aproximadamente 30 atualizações/s no celular. Sem WebGL, áudio, analytics, formulário, CMS ou chamadas externas em tempo de execução.
 
-## O que foi reaproveitado
+## Conteúdo e direitos
 
-Mesma stack HTML/CSS/ES modules, fonte Cormorant Garamond local, fotografias e desenhos em WebP, dados do portfólio, vento com quatro malhas pequenas de tecido, gravidade, inércia e pontos superiores presos à viga, servidor e build sem dependências. A lógica de modal, bloqueio de body e pergaminhos como navegação foi removida.
+As nove tatuagens, sete desenhos e fotografias da artista vieram dos arquivos fornecidos pelo usuário. O retrato principal é a segunda foto enviada, preparando a máquina. Os textos em primeira pessoa são rascunhos editoriais autorizados e sujeitos à revisão da artista; não inventam datas, credenciais, preços, endereço, depoimentos ou fatos de trajetória.
 
-## Editar
+O cenário cinematográfico e o ramo botânico são ilustrativos e decorativos. A silhueta não representa Shimizu; a paisagem não representa o estúdio. Os desenhos e tatuagens nunca foram substituídos por arte gerada.
 
-- index.html: estrutura semântica, textos e narrativa contínua.
-- styles.css: enquadramentos desktop/mobile, materialidade, proporções e capítulos.
-- src/content.js: obras, descrições e repertório.
-- src/app.js: direção do scroll, galeria, menu e âncoras.
-- src/wind.js: vento, rajadas, fixação responsiva na viga e pétalas de sakura.
-- src/cloth.js: malha física Verlet e renderização do tecido em Canvas 2D.
-- assets/art: imagens reais fornecidas.
-- assets/torii-cinematic.webp e assets/torii-cinematic-mobile.webp: cenários cinematográficos ilustrativos horizontal e vertical.
-- assets/plum-branch.webp: detalhe botânico decorativo com transparência.
-- qa/artifacts-v3: evidências e comparação histórica da V3.
-- qa/artifacts-v3.1: capturas e verificação de scroll, tecido, pétalas e controles da revisão atual.
-- project-docs: decisões, proveniência e limitações.
+WhatsApp confirmado: +55 11 95371 7745. Instagram: https://www.instagram.com/shimizumo/. Os links abrem a conversa; nenhuma mensagem é enviada automaticamente.
 
-## Fidelidade e conteúdo
+Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 distribuído localmente sob a licença padrão indicada em `assets/vendor/GSAP-LICENSE.txt`, preservando o cabeçalho original. Nenhum pacote pago ou serviço externo foi contratado.
 
-O novo blueprint codex-clipboard-10c40256 define as seis composições mobile. A correção mais recente do usuário exige uma tela inteira por dobra e supera o min-height flexível do brief. Preto, fotografia dominante, serif editorial, UI contida e Processo claro como sketchbook. Composição própria para desktop e celular deitado. Os estudos reais aparecem em HTML sobre o cenário cinematográfico, sem tatuagens fictícias atribuídas à artista.
+## Arquivos principais
 
-Não foram inventados endereço, preços, biografia, premiações, clientes ou depoimentos. O retrato principal usa a segunda fotografia real enviada em 07/10/2026, preparando a máquina. As outras fotos entram em Processo e no cotidiano do estúdio. A V3.2 amplia o texto de A artista com rascunho editorial autorizado em primeira pessoa, sobre observação, desenho e relação com a pele; não afirma fatos biográficos específicos. Textos continuam sujeitos a revisão pela artista. O tratamento negativo foi removido; os desenhos aparecem no papel original. A galeria inclui a nova foto do tigre colorido.
+- `index.html`: conteúdo semântico, navegação, controles e diálogo.
+- `styles.css`: estrutura, enquadramentos e capítulos existentes.
+- `src/atelier.css` e `src/fonts.css`: direção V4, tipografia e adaptação responsiva.
+- `src/app.js`: rolagem, galerias, gaveta e âncoras.
+- `src/atelier.js`: revelações, explorador de arte e etapas interativas.
+- `src/atmosphere.js`: névoa, reflexos e ondas de água.
+- `src/wind.js` e `src/cloth.js`: vento, pétalas e malha física das bandeiras.
+- `src/content.js`: obras, descrições e contato.
+- `assets/art`: arquivos reais fornecidos.
 
-Fontes sob SIL OFL em assets/fonts/OFL.txt. Não há serviços externos, analytics, CMS, coleta de dados ou áudio em tempo de execução. Destino WhatsApp confirmado pelo usuário. Cenário ilustrativo: a silhueta anônima não representa Shimizu, e a paisagem não representa o estúdio. O ramo decorativo não é flash da artista. Processo usa a foto real de desenho, pincel e tinta; não foi fabricada fotografia dela desenhando.
+## Verificação
 
-A validação automatizada usa Chromium local. Safari real, aparelhos físicos e taxa medida de 60 fps não estão certificados.
+O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
+```text
+node qa/v4-qa.mjs
+node qa/v4-interactions.mjs
+```
 
+O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica as interações novas, o diálogo, o Processo e a atmosfera. Os relatórios de execução acompanham a entrega.
 
+Verificação em Chromium local por CDP, pois a ponte do navegador integrado estava indisponível. Safari real, aparelhos físicos e desempenho de 60 fps não estão certificados. Sem JavaScript, conteúdo e links reais continuam acessíveis; os efeitos e o explorador ampliado são melhorias progressivas.
 
+## Referências de direção
 
-V3.2: menu em gaveta pela direita com fechamento animado e backdrop. Home com 36 pétalas no celular e 60 no desktop, queda 50% mais rápida; pausa e movimento reduzido preservados.
+Referências pesquisadas antes da implementação, usadas para princípios de ritmo, materialidade e tipografia, sem copiar código, assets ou composição:
 
-V3.3: botão persistente de WhatsApp, parágrafos de 18 a 24 px no desktop, legendas de 16 px e navegação ampliada. Galerias e textos reservam espaço para o botão flutuante. A tipografia se adapta também a telas de pouca altura, mantendo cada capítulo dentro de uma tela.
+- https://www.awwwards.com/sites/takafumi-senda-portfolio
+- https://tympanus.net/Development/MotionTrailAnimations/
+- https://www.siteinspire.com/website/13644-iwonderu-studios
 
-V3.4: fotos de tatuagens sem dessaturação e retrato com grayscale de 10%, conservando a luz quente. Sequência abre em 01/09 com a manga dominante. Disponíveis usa uma superfície com folhas posicionadas individualmente, proporções nominais 54/46, alturas e rotações diferentes, pequenas sobreposições das margens e desenhos completos. WhatsApp é o botão vermelho primário em Contato, Instagram fica secundário; o botão persistente usa o mesmo vermelho e marfim do site.
+Os mockups e arquivos da artista fornecidos na conversa permanecem a principal referência de identidade.

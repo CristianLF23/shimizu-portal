@@ -24,7 +24,7 @@ export const availableDesigns = [
   {name:'Figuras',image:'study-faces',alt:'Dois desenhos de rostos femininos com formas orgânicas no papel',text:'Figuras. Consulte a disponibilidade de cada composição.'},
   {name:'Peônia',image:'study-flower',alt:'Desenho de peônia em preto sobre papel claro',text:'Peônia. Converse sobre escala e composição no corpo.'},
   {name:'Figura e vaso',image:'study-vase',alt:'Desenho de figura feminina e vaso com uma grande flor',text:'Figura e vaso. Consulte as possibilidades para este desenho.'},
-  {name:'Formas',image:'study-vessel',alt:'Desenho de vaso ornamental com rosto feminino e formas pretas',text:'Formas. Consulte tamanho e disponibilidade pelo Instagram.'},
+  {name:'Formas',image:'study-vessel',alt:'Desenho de vaso ornamental com rosto feminino e formas pretas',text:'Formas. Converse sobre tamanho e disponibilidade.'},
   {name:'Caveira e flores',image:'study-skull',alt:'Desenho de caveira entre flores e figuras sobre papel claro',text:'Caveira e flores. Converse sobre a ideia e a região do corpo.'},
   {name:'Composição floral',image:'study-body',alt:'Estudo de composição floral simétrica para a anatomia',text:'Composição floral. Consulte as possibilidades de adaptação.'}
 ];
