@@ -198,3 +198,12 @@ body[data-chapter=processo]:not(.menu-open) .brand-lockup small,body[data-chapte
 @media(min-width:1001px) and (max-width:1200px){.desktop-nav{gap:17px;margin-right:15px}.desktop-nav a{font-size:12px}.section-heading>p,.process-section .section-heading>p,.artist-section .section-heading>p,.contact-section .section-heading>p{font-size:12px}.gallery-hint{font-size:10px}}
 @media(max-width:1000px) and (min-height:701px){.hero-explore,.work-open,.text-link,.outline-link,.contact-link,.contact-secondary{font-size:12px}.home-kicker{font-size:10px}.gallery-hint{font-size:10px}.process-steps h3 button{font-size:13px}}
 @media(max-width:1000px){.viewer-figure img{inset:12px;width:calc(100% - 24px);height:calc(100% - 24px)}}
+
+/* A quiet, shared corner: only background media gives space to the brush. */
+.ink-media-plane{position:absolute;inset:0;clip-path:var(--ink-media-clip,none);mask-image:var(--ink-media-mask,none);mask-composite:add;pointer-events:none}
+.ink-media-plane .work-hero{pointer-events:auto}
+
+@media(min-width:1001px){.artist-inscription,.portrait-caption{left:max(8%,calc(var(--ink-margin-right,0px) + 24px))}}
+
+.artist-section .text-link{width:fit-content}
+@media(max-width:1000px) and (min-height:501px){.artist-section .text-link{margin-inline:auto}}

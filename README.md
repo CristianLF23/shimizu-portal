@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.2
+# SHIMIZU · Portal V4.3
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.2
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.3
 
 ## Executar
 
@@ -14,7 +14,7 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.2. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.3. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
 
@@ -89,3 +89,12 @@ Orientação final do usuário: o desenho mantém o tamanho discreto da versão 
 Escalas máximas mantidas em 0.43 no celular e 0.68 no desktop, com redução proporcional em telas baixas. Marfim suave em capítulos escuros e carvão no Processo. Sem mudanças de conteúdo, fotografias, estrutura ou contatos. A opção de pausa e o movimento reduzido mostram a etapa estática; menu e visualizador interrompem o desenho.
 
 O roteiro qa/ink-safe-qa.mjs verifica ausência de tinta nas fotos, nos controles e nos textos visíveis, abertura sem desenho, tamanho discreto, cinco etapas lentas, retorno, menus, visualizador, reduced motion e mudança horizontal dos disponíveis. A proteção é aferida por leitura dos pixels do canvas, complementada pelas capturas representativas.
+
+
+## V4.3: desenho com posição fixa
+
+A pintura mantém o mesmo canto inferior esquerdo em todos os capítulos, com escala responsiva discreta. A abertura permanece sem desenho. Cada capítulo acrescenta uma etapa em aproximadamente seis segundos; no Processo, pilares e um segundo telhado aparecem com tinta escura sobre o fundo claro.
+
+Uma pequena margem com transição suave nos fundos fotográficos recebe a pintura. Galerias, botões, fotografias visíveis e linhas de texto permanecem protegidos. A inscrição da artista foi afastada desse canto no desktop. A posição só muda se o tamanho da janela mudar.
+
+Arquivos desta revisão: `src/ink.js`, `src/atelier.css`, `index.html` e versões dos módulos. Verificação: `qa/ink-fixed-qa.mjs` para posição constante, pintura do Processo, sobreposição e pausa; `qa/v4.3-qa.mjs` para navegação e responsividade. Evidências e limitações em `project-docs/V4.3_VERIFICATION.md` na entrega.

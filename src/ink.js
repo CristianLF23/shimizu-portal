@@ -46,21 +46,28 @@ function sample(d){
 export class InkCompanion{
  constructor(canvas,scroller){
   this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:true});this.scroller=scroller;
-  this.chapter=0;this.progress=0;this.target=0;this.paper=0;this.paperTarget=0;this.frame=0;this.last=0;this.lastDraw=0;this.time=0;this.drawCount=0;this.active=false;this.animate=true;this.placedChapter=-1;
+  this.chapter=0;this.progress=0;this.target=0;this.paper=0;this.paperTarget=0;this.frame=0;this.last=0;this.lastDraw=0;this.time=0;this.drawCount=0;this.active=false;this.animate=true;
   this.strokes=strokes.map(([stage,width,d],i)=>({stage:i===0?3:Math.max(0,stage-1),width,paths:sample(d),seed:i*17}));
   this.strokes.forEach(s=>{const peers=this.strokes.filter(a=>a.stage===s.stage);s.count=peers.length;s.order=peers.indexOf(s);});
-  this.boxes=[];this.protectUntil=0;this.lastProtect=0;this.tick=this.tick.bind(this);this.onResize=()=>{this.resize();this.protect();this.place();this.draw();};
-  this.onScroll=()=>{if(this.measureFrame)return;this.measureFrame=requestAnimationFrame(()=>{this.measureFrame=0;this.protect();if(this.chapter>0&&this.placedChapter!==this.chapter&&Math.abs(this.scroller.scrollTop-this.scroller.children[this.chapter].offsetTop)<2)this.place();if(!this.animate)this.draw();});};
+  this.boxes=[];this.protectUntil=0;this.lastProtect=0;this.tick=this.tick.bind(this);this.onResize=()=>{this.resize();this.protect();this.draw();};
+  this.onScroll=()=>{if(this.measureFrame)return;this.measureFrame=requestAnimationFrame(()=>{this.measureFrame=0;this.protect();if(!this.animate)this.draw();});};
   addEventListener('resize',this.onResize,{passive:true});scroller.addEventListener('scroll',this.onScroll,{passive:true,capture:true});
   this.textObserver=new MutationObserver(()=>{this.protectUntil=performance.now()+800;this.onScroll();});this.textObserver.observe(scroller,{childList:true,characterData:true,subtree:true});
-  this.resize();this.protect();document.fonts.ready.then(()=>{this.protectUntil=performance.now()+1400;this.protect();this.place();this.draw();});
+  this.resize();this.protect();document.fonts.ready.then(()=>{this.protectUntil=performance.now()+1400;this.protect();this.draw();});
  }
  resize(){
   this.width=innerWidth;this.height=innerHeight;this.mobile=this.width<=1000;this.dpr=Math.min(devicePixelRatio||1,this.mobile?1.25:1.5);
   this.canvas.width=Math.round(this.width*this.dpr);this.canvas.height=Math.round(this.height*this.dpr);
-  // Preserve the original discreet size; placement seeks unoccupied margins.
+  // One viewport anchor for every chapter. Only a viewport resize may move it.
   this.scale=this.mobile?Math.min(.43,this.height/1650):Math.min(.68,this.height/1300);
-  this.x=this.mobile?8:18;this.y=this.height-355*this.scale-62;this.placedChapter=-1;
+  this.x=this.mobile?8:18;this.y=this.height-355*this.scale-10;
+  // Reserve a small corner in background media, never in galleries or controls.
+  const right=this.x+260*this.scale+20,top=this.y-14,radius=20;
+  this.reserve={right:right-radius,top:top+radius};
+  const path=`M0 0H${this.width}V${this.height}H${right}V${top+radius}Q${right} ${top} ${right-radius} ${top}H0Z`;
+  document.documentElement.style.setProperty("--ink-media-clip",`path("${path}")`);
+  document.documentElement.style.setProperty('--ink-margin-right',`${right}px`);
+  document.documentElement.style.setProperty('--ink-media-mask',`linear-gradient(to right,transparent ${right}px,#000 ${right+48}px),linear-gradient(to bottom,#000 ${top-48}px,transparent ${top}px)`);
  }
  protect(){
   // Protect photographs and full hit targets, as well as individual text lines.
@@ -80,37 +87,26 @@ export class InkCompanion{
    if(el.closest('.contact-landscape,.environment,[hidden],.sr-only'))continue;
    const r=el.getBoundingClientRect(),gallery=el.closest('.available-gallery,.work-fragments'),clip=gallery?.getBoundingClientRect();
    const left=Math.max(0,r.left-5,clip?.left??0),top=Math.max(0,r.top-5,clip?.top??0),right=Math.min(this.width,r.right+5,clip?.right??this.width),bottom=Math.min(this.height,r.bottom+5,clip?.bottom??this.height);
-   if(right>left&&bottom>top)boxes.push({x:left,y:top,w:right-left,h:bottom-top});
+   if(right<=left||bottom<=top)continue;
+   const plane=el.closest('.ink-media-plane');
+   if(plane){
+    // These pixels are physically clipped out of the photograph plane.
+    const boundary=plane.getBoundingClientRect(),cutX=boundary.left+this.reserve.right,cutY=boundary.top+this.reserve.top;
+    if(top<cutY)boxes.push({x:left,y:top,w:right-left,h:Math.min(bottom,cutY)-top});
+    if(right>cutX&&bottom>cutY)boxes.push({x:Math.max(left,cutX),y:Math.max(top,cutY),w:right-Math.max(left,cutX),h:bottom-Math.max(top,cutY)});
+   }else boxes.push({x:left,y:top,w:right-left,h:bottom-top});
   }
   this.boxes=boxes;
   this.lastProtect=performance.now();
  }
- place(){
-  if(!this.chapter)return;
-  // Test the actual marks, so a narrow lantern can fit beside a wider gallery.
-  const points=this.strokes.filter(s=>s.stage<this.target).flatMap(s=>s.paths.flatMap(path=>path.filter((p,i)=>i%6===0))),scale=this.scale;
-  const minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y));
-  const x0=this.mobile?8:18,y0=this.height-355*scale-62;
-  const xs=[x0,8-minX*scale,this.width*.08,this.width*.22,this.width*.42,this.width*.63,this.width-maxX*scale-10];
-  const ys=[y0,this.height-maxY*scale-10,this.height-maxY*scale-48,y0-65,y0-130,this.height*.14,this.height*.3,this.height*.46,this.height*.62];
-  let best={x:x0,y:y0,score:-Infinity,visible:0};
-  for(const x of xs)for(const y of ys){
-   if(x+minX*scale<4||x+maxX*scale>this.width-8||y+minY*scale<80||y+maxY*scale>this.height-8)continue;
-   let visible=0;
-   for(const p of points){const px=x+p.x*scale,py=y+p.y*scale;if(!this.boxes.some(b=>px>b.x-2&&px<b.x+b.w+2&&py>b.y-2&&py<b.y+b.h+2))visible++;}
-   const fraction=visible/points.length,score=fraction-Math.hypot((x-x0)/this.width,(y-y0)/this.height)*.08;
-   if(score>best.score)best={x,y,score,visible:fraction};
-  }
-  this.x=best.x;this.y=best.y;this.visibleFraction=best.visible;this.placedChapter=this.chapter;
- }
  setChapter(index){
   if(index===this.chapter)return;
-  this.chapter=index;this.target=index;this.paperTarget=index===3?1:0;this.placedChapter=-1;
+  this.chapter=index;this.target=index;this.paperTarget=index===3?1:0;
   this.protectUntil=performance.now()+1400;
   this.progress=Math.max(Math.max(0,index-1),this.progress);
   if(this.progress>this.target||!this.animate)this.progress=this.target;
   if(!this.animate)this.paper=this.paperTarget;
-  this.protect();if(Math.abs(this.scroller.scrollTop-this.scroller.children[index].offsetTop)<2)this.place();this.draw();
+  this.protect();this.draw();
  }
  setState({active,animate}){
   this.active=Boolean(active&&this.chapter>0&&this.ctx);this.animate=Boolean(animate);this.canvas.hidden=!this.active;
