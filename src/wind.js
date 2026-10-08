@@ -1,4 +1,4 @@
-import {ClothFlag} from './cloth.js?v=4.3';
+import {ClothFlag} from './cloth.js?v=4.4';
 export const motionConfig={intensity:.8,gustStrength:1.8,portalZoom:.02,particlesDesktop:60,particlesMobile:36,petalFallRate:1.5};
 export class WindSystem {
  constructor(scene){

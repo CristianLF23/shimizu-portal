@@ -70,10 +70,13 @@ export class InkCompanion{
   document.documentElement.style.setProperty('--ink-media-mask',`linear-gradient(to right,transparent ${right}px,#000 ${right+48}px),linear-gradient(to bottom,#000 ${top-48}px,transparent ${top}px)`);
  }
  protect(){
+  // Mobile Process explicitly paints above all content; other chapters retain masks.
+  if(this.mobile&&this.chapter===3){this.boxes=[];this.lastProtect=performance.now();return;}
   // Protect photographs and full hit targets, as well as individual text lines.
   const walker=document.createTreeWalker(this.scroller,NodeFilter.SHOW_TEXT),range=document.createRange(),boxes=[],movingText=performance.now()<this.protectUntil,paddingY=movingText?9:3;
   let node;
   while(node=walker.nextNode()){
+   if(this.mobile&&this.chapter===5&&node.parentElement.closest('#whatsapp-contact,.contact-secondary,#whatsapp-floating'))continue;
    if(!node.textContent.trim()||node.parentElement.closest('.sr-only,[hidden],script,style,canvas'))continue;
    range.selectNodeContents(node);
    for(const r of range.getClientRects()){
@@ -84,6 +87,7 @@ export class InkCompanion{
   }
   const elements=[...this.scroller.querySelectorAll('img:not(.ornament),a,button'),...document.querySelectorAll('.masthead,#whatsapp-floating,.chapter-rail')];
   for(const el of elements){
+   if(this.mobile&&this.chapter===5&&el.matches('#whatsapp-contact,.contact-secondary,#whatsapp-floating'))continue;
    if(el.closest('.contact-landscape,.environment,[hidden],.sr-only'))continue;
    const r=el.getBoundingClientRect(),gallery=el.closest('.available-gallery,.work-fragments'),clip=gallery?.getBoundingClientRect();
    const left=Math.max(0,r.left-5,clip?.left??0),top=Math.max(0,r.top-5,clip?.top??0),right=Math.min(this.width,r.right+5,clip?.right??this.width),bottom=Math.min(this.height,r.bottom+5,clip?.bottom??this.height);

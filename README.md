@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.3
+# SHIMIZU · Portal V4.4
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.3
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.4
 
 ## Executar
 
@@ -14,7 +14,7 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.3. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.4. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
 
@@ -98,3 +98,6 @@ A pintura mantém o mesmo canto inferior esquerdo em todos os capítulos, com es
 Uma pequena margem com transição suave nos fundos fotográficos recebe a pintura. Galerias, botões, fotografias visíveis e linhas de texto permanecem protegidos. A inscrição da artista foi afastada desse canto no desktop. A posição só muda se o tamanho da janela mudar.
 
 Arquivos desta revisão: `src/ink.js`, `src/atelier.css`, `index.html` e versões dos módulos. Verificação: `qa/ink-fixed-qa.mjs` para posição constante, pintura do Processo, sobreposição e pausa; `qa/v4.3-qa.mjs` para navegação e responsividade. Evidências e limitações em `project-docs/V4.3_VERIFICATION.md` na entrega.
+
+## V4.4 mobile
+Pinceladas independentes no topo do Processo, folha decorativa removida da Artista e exceções explícitas de sobreposição: Processo acima dos elementos; Contato acima dos botões. Canvas sem captura de toque, posição e escala mantidas. Desktop preservado. QA em qa/mobile-v4.4.mjs.
