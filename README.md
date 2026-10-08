@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.1
+# SHIMIZU · Portal V4.2
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.1
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.2
 
 ## Executar
 
@@ -14,7 +14,7 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.1. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.2. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
 
@@ -58,8 +58,8 @@ Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 d
 O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
 ```text
-node qa/v4.1-qa.mjs
-node qa/ink-qa.mjs
+node qa/v4.2-qa.mjs
+node qa/ink-safe-qa.mjs
 ```
 
 O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica a pintura progressiva, avanço e retorno das etapas, pausa, menu, diálogo e movimento reduzido. Os relatórios de execução acompanham a entrega.
@@ -81,3 +81,11 @@ Os mockups e arquivos da artista fornecidos na conversa permanecem a principal r
 A referência adicional do usuário é um caderno com lanterna e telhados desenhados a pincel. Uma ilustração própria ocupa a margem inferior esquerda e recebe novas pinceladas em cada um dos seis capítulos: primeiro gesto, lanterna, telhado, segundo telhado, estrutura e ramo florido com selo. Traços têm pressão variável, cerdas separadas e falhas de pigmento. A mudança de dobra preserva o desenho; voltar reduz à etapa anterior. O salto direto por menu completa o que veio antes e anima somente a etapa atual. No Processo, a cor muda para carvão.
 
 A cena fica estática com pausa manual ou movimento reduzido e desaparece durante menu/visualizador; aba oculta interrompe execução. Arte original decorativa, não trabalho da tatuadora. Sem biblioteca ou asset novo. Implementação: src/ink.js, integrado ao ciclo existente em src/atelier.js, canvas decorativo em index.html e posicionamento em src/atelier.css. A versão continua com seis dobras e os mesmos contatos e obras.
+
+## V4.2 · Desenho discreto nos espaços livres
+
+Orientação final do usuário: o desenho mantém o tamanho discreto da versão publicada, preserva fotos, botões e textos e não aparece na abertura. A pintura começa em Trabalhos e progride em cinco etapas de aproximadamente seis segundos. Posição escolhida em cada capítulo a partir dos espaços livres, considerando as marcas reais de lanterna, telhados e ramo. Recortes de segurança garantem que não haja tinta sobre fotografias, alvos clicáveis e linhas de texto.
+
+Escalas máximas mantidas em 0.43 no celular e 0.68 no desktop, com redução proporcional em telas baixas. Marfim suave em capítulos escuros e carvão no Processo. Sem mudanças de conteúdo, fotografias, estrutura ou contatos. A opção de pausa e o movimento reduzido mostram a etapa estática; menu e visualizador interrompem o desenho.
+
+O roteiro qa/ink-safe-qa.mjs verifica ausência de tinta nas fotos, nos controles e nos textos visíveis, abertura sem desenho, tamanho discreto, cinco etapas lentas, retorno, menus, visualizador, reduced motion e mudança horizontal dos disponíveis. A proteção é aferida por leitura dos pixels do canvas, complementada pelas capturas representativas.

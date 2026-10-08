@@ -1,6 +1,6 @@
-import {AtelierAtmosphere} from './atmosphere.js?v=4.1';
-import {InkCompanion} from './ink.js?v=4.1';
-import {works,availableDesigns,whatsappNumber} from './content.js?v=4.1';
+import {AtelierAtmosphere} from './atmosphere.js?v=4.2';
+import {InkCompanion} from './ink.js?v=4.2';
+import {works,availableDesigns,whatsappNumber} from './content.js?v=4.2';
 
 const gsap=window.gsap;
 export function initAtelier({wind,scroller,getWorkIndex,showWork}){
@@ -16,10 +16,10 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  const own=tl=>{timelines.add(tl);tl.eventCallback('onComplete',()=>timelines.delete(tl));return tl;};
  function sync(){
   const active=canMove();
-  ink.setState({active:!document.hidden&&!viewer.open&&!document.body.classList.contains('menu-open'),animate:enabled()});
   atmosphere.setEnabled(active&&chapter===0);wind.sync();
   document.documentElement.classList.toggle('atelier-still',!active);
   if(!active){for(const tl of timelines)tl.progress(1).kill();timelines.clear();gsap.set(scene,{'--gaze-x':'0px','--gaze-y':'0px'});}
+  ink.setState({active:!document.hidden&&!viewer.open&&!document.body.classList.contains('menu-open'),animate:enabled()});
  }
  function reveal(index){
   const section=chapters[index];
@@ -35,8 +35,8 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
   own(tl);
  }
  function onChapter(index,progress){
-  if(index!==chapter){chapter=index;sync();reveal(index);}
   ink.setChapter(index);
+  if(index!==chapter){chapter=index;sync();reveal(index);}
   chapters.forEach((s,i)=>s.classList.toggle('chapter-current',i===index));
   document.querySelectorAll('.chapter-rail a').forEach((a,i)=>a.toggleAttribute('data-active',i===index));
   scene.style.setProperty('--passage',Math.min(1,progress));

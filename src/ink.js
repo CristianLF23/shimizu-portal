@@ -1,4 +1,4 @@
-// Original brush drawing, revealed in six chapters. All strokes are authored here.
+// Original brush drawing, revealed after the opening in five quiet stages.
 const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
 const noise=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
 const smooth=n=>{n=clamp(n);return n*n*(3-2*n);};
@@ -46,52 +46,90 @@ function sample(d){
 export class InkCompanion{
  constructor(canvas,scroller){
   this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:true});this.scroller=scroller;
-  this.chapter=0;this.progress=0;this.target=1;this.paper=0;this.paperTarget=0;this.frame=0;this.last=0;this.lastDraw=0;this.time=0;this.drawCount=0;this.active=false;this.animate=true;
-  this.strokes=strokes.map(([stage,width,d],i)=>({stage,width,paths:sample(d),seed:i*17}));
+  this.chapter=0;this.progress=0;this.target=0;this.paper=0;this.paperTarget=0;this.frame=0;this.last=0;this.lastDraw=0;this.time=0;this.drawCount=0;this.active=false;this.animate=true;this.placedChapter=-1;
+  this.strokes=strokes.map(([stage,width,d],i)=>({stage:i===0?3:Math.max(0,stage-1),width,paths:sample(d),seed:i*17}));
   this.strokes.forEach(s=>{const peers=this.strokes.filter(a=>a.stage===s.stage);s.count=peers.length;s.order=peers.indexOf(s);});
-  this.boxes=[];this.tick=this.tick.bind(this);this.onResize=()=>{this.resize();this.protect();this.draw();};
-  this.onScroll=()=>{if(this.measureFrame)return;this.measureFrame=requestAnimationFrame(()=>{this.measureFrame=0;this.protect();if(!this.animate)this.draw();});};
-  addEventListener('resize',this.onResize,{passive:true});scroller.addEventListener('scroll',this.onScroll,{passive:true});
-  this.resize();this.protect();document.fonts.ready.then(()=>{this.protect();this.draw();});
+  this.boxes=[];this.protectUntil=0;this.lastProtect=0;this.tick=this.tick.bind(this);this.onResize=()=>{this.resize();this.protect();this.place();this.draw();};
+  this.onScroll=()=>{if(this.measureFrame)return;this.measureFrame=requestAnimationFrame(()=>{this.measureFrame=0;this.protect();if(this.chapter>0&&this.placedChapter!==this.chapter&&Math.abs(this.scroller.scrollTop-this.scroller.children[this.chapter].offsetTop)<2)this.place();if(!this.animate)this.draw();});};
+  addEventListener('resize',this.onResize,{passive:true});scroller.addEventListener('scroll',this.onScroll,{passive:true,capture:true});
+  this.textObserver=new MutationObserver(()=>{this.protectUntil=performance.now()+800;this.onScroll();});this.textObserver.observe(scroller,{childList:true,characterData:true,subtree:true});
+  this.resize();this.protect();document.fonts.ready.then(()=>{this.protectUntil=performance.now()+1400;this.protect();this.place();this.draw();});
  }
  resize(){
   this.width=innerWidth;this.height=innerHeight;this.mobile=this.width<=1000;this.dpr=Math.min(devicePixelRatio||1,this.mobile?1.25:1.5);
   this.canvas.width=Math.round(this.width*this.dpr);this.canvas.height=Math.round(this.height*this.dpr);
-  // A partial page of the sketchbook enters the composition from the margin.
+  // Preserve the original discreet size; placement seeks unoccupied margins.
   this.scale=this.mobile?Math.min(.43,this.height/1650):Math.min(.68,this.height/1300);
-  this.x=this.mobile?2:6;this.y=this.height-355*this.scale-(this.chapter===5?62:18);
+  this.x=this.mobile?8:18;this.y=this.height-355*this.scale-62;this.placedChapter=-1;
  }
  protect(){
-  const selectors='.section-heading,.home-editorial,.process-steps,.work-fragments,.available-gallery,.available-bottom,.work-controls,.work-navigation,.artist-inscription,.portrait-caption,.process-active-label,.site-footer';
-  this.boxes=[...this.scroller.querySelectorAll(selectors)].map(e=>e.getBoundingClientRect()).filter(b=>b.bottom>0&&b.top<this.height).map(b=>({x:b.left-8,y:b.top-6,w:b.width+16,h:b.height+12}));
+  // Protect photographs and full hit targets, as well as individual text lines.
+  const walker=document.createTreeWalker(this.scroller,NodeFilter.SHOW_TEXT),range=document.createRange(),boxes=[],movingText=performance.now()<this.protectUntil,paddingY=movingText?9:3;
+  let node;
+  while(node=walker.nextNode()){
+   if(!node.textContent.trim()||node.parentElement.closest('.sr-only,[hidden],script,style,canvas'))continue;
+   range.selectNodeContents(node);
+   for(const r of range.getClientRects()){
+    if(r.width<1||r.height<1||r.bottom<=0||r.top>=this.height||r.right<=0||r.left>=this.width)continue;
+    const left=Math.max(0,r.left-4),top=Math.max(0,r.top-paddingY),right=Math.min(this.width,r.right+4),bottom=Math.min(this.height,r.bottom+paddingY);
+    boxes.push({x:left,y:top,w:right-left,h:bottom-top});
+   }
+  }
+  const elements=[...this.scroller.querySelectorAll('img:not(.ornament),a,button'),...document.querySelectorAll('.masthead,#whatsapp-floating,.chapter-rail')];
+  for(const el of elements){
+   if(el.closest('.contact-landscape,.environment,[hidden],.sr-only'))continue;
+   const r=el.getBoundingClientRect(),gallery=el.closest('.available-gallery,.work-fragments'),clip=gallery?.getBoundingClientRect();
+   const left=Math.max(0,r.left-5,clip?.left??0),top=Math.max(0,r.top-5,clip?.top??0),right=Math.min(this.width,r.right+5,clip?.right??this.width),bottom=Math.min(this.height,r.bottom+5,clip?.bottom??this.height);
+   if(right>left&&bottom>top)boxes.push({x:left,y:top,w:right-left,h:bottom-top});
+  }
+  this.boxes=boxes;
+  this.lastProtect=performance.now();
+ }
+ place(){
+  if(!this.chapter)return;
+  // Test the actual marks, so a narrow lantern can fit beside a wider gallery.
+  const points=this.strokes.filter(s=>s.stage<this.target).flatMap(s=>s.paths.flatMap(path=>path.filter((p,i)=>i%6===0))),scale=this.scale;
+  const minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y));
+  const x0=this.mobile?8:18,y0=this.height-355*scale-62;
+  const xs=[x0,8-minX*scale,this.width*.08,this.width*.22,this.width*.42,this.width*.63,this.width-maxX*scale-10];
+  const ys=[y0,this.height-maxY*scale-10,this.height-maxY*scale-48,y0-65,y0-130,this.height*.14,this.height*.3,this.height*.46,this.height*.62];
+  let best={x:x0,y:y0,score:-Infinity,visible:0};
+  for(const x of xs)for(const y of ys){
+   if(x+minX*scale<4||x+maxX*scale>this.width-8||y+minY*scale<80||y+maxY*scale>this.height-8)continue;
+   let visible=0;
+   for(const p of points){const px=x+p.x*scale,py=y+p.y*scale;if(!this.boxes.some(b=>px>b.x-2&&px<b.x+b.w+2&&py>b.y-2&&py<b.y+b.h+2))visible++;}
+   const fraction=visible/points.length,score=fraction-Math.hypot((x-x0)/this.width,(y-y0)/this.height)*.08;
+   if(score>best.score)best={x,y,score,visible:fraction};
+  }
+  this.x=best.x;this.y=best.y;this.visibleFraction=best.visible;this.placedChapter=this.chapter;
  }
  setChapter(index){
   if(index===this.chapter)return;
-  this.chapter=index;this.target=index+1;this.paperTarget=index===3?1:0;
-  this.y=this.height-355*this.scale-(index===5?62:18);
-  this.progress=Math.max(index,this.progress);
+  this.chapter=index;this.target=index;this.paperTarget=index===3?1:0;this.placedChapter=-1;
+  this.protectUntil=performance.now()+1400;
+  this.progress=Math.max(Math.max(0,index-1),this.progress);
   if(this.progress>this.target||!this.animate)this.progress=this.target;
   if(!this.animate)this.paper=this.paperTarget;
-  this.protect();this.draw();
+  this.protect();if(Math.abs(this.scroller.scrollTop-this.scroller.children[index].offsetTop)<2)this.place();this.draw();
  }
  setState({active,animate}){
-  this.active=Boolean(active&&this.ctx);this.animate=Boolean(animate);this.canvas.hidden=!this.active;
-  if(!this.active||!this.animate){cancelAnimationFrame(this.frame);this.frame=0;this.last=0;if(!this.animate){this.progress=this.target;this.paper=this.paperTarget;}this.draw();return;}
+  this.active=Boolean(active&&this.chapter>0&&this.ctx);this.animate=Boolean(animate);this.canvas.hidden=!this.active;
+  if(!this.active||!this.animate){cancelAnimationFrame(this.frame);this.frame=0;this.last=0;if(!this.animate){this.progress=this.target;this.paper=this.paperTarget;}this.protect();this.draw();return;}
   if(!this.frame){this.last=0;this.frame=requestAnimationFrame(this.tick);}
  }
  tick(now){
   this.frame=0;if(!this.active||!this.animate)return;
   const dt=this.last?Math.min((now-this.last)/1000,.05):1/60;this.last=now;this.time+=dt;
-  this.progress=Math.min(this.target,this.progress+dt*.48);
+  this.progress=Math.min(this.target,this.progress+dt/6);
   this.paper+=(this.paperTarget-this.paper)*(1-Math.exp(-dt*5));
-  if(now-this.lastDraw>=40){this.draw();this.lastDraw=now;}
+  if(now-this.lastDraw>=40){if(now<this.protectUntil)this.protect();this.draw();this.lastDraw=now;}
   this.frame=requestAnimationFrame(this.tick);
  }
  draw(){
   if(!this.ctx)return;const c=this.ctx;c.setTransform(this.dpr,0,0,this.dpr,0,0);c.clearRect(0,0,this.width,this.height);
   c.save();c.translate(this.x,this.y);c.scale(this.scale,this.scale);
   const p=this.paper,breath=this.animate?.97+Math.sin(this.time*.36)*.03:1;
-  c.strokeStyle=`rgb(${Math.round(193-161*p)},${Math.round(184-157*p)},${Math.round(168-145*p)})`;c.lineCap='round';
+  c.strokeStyle=`rgb(${Math.round(205-177*p)},${Math.round(195-172*p)},${Math.round(176-156*p)})`;c.lineCap='round';
   for(const s of this.strokes){
    const amount=clamp((this.progress-s.stage)*s.count-s.order);
    if(!amount)continue;
@@ -111,7 +149,7 @@ export class InkCompanion{
    }
   }
   // A few original vermilion blossom gestures complete the sixth chapter.
-  const finish=clamp(this.progress-5);
+  const finish=clamp(this.progress-4);
   if(finish){
    c.fillStyle=p>.5?'#8e2d23':'#b74d3b';
    [[27,21],[58,23],[101,17],[122,22],[145,61],[129,67],[84,41]].forEach(([x,y],i)=>{
@@ -120,10 +158,9 @@ export class InkCompanion{
    });
    c.globalAlpha=finish*.65;c.strokeStyle='#ad4936';c.lineWidth=1.8;c.strokeRect(222,295,16,21);c.beginPath();c.moveTo(234,300);c.bezierCurveTo(220,296,226,310,234,307);c.bezierCurveTo(239,314,224,316,227,311);c.stroke();
   }
-  c.restore();c.globalCompositeOperation='destination-out';c.globalAlpha=1;
+  c.restore();c.globalAlpha=1;c.globalCompositeOperation='destination-out';
   for(const b of this.boxes)c.fillRect(b.x,b.y,b.w,b.h);
-  c.fillRect(0,0,this.width,78);c.fillRect(this.width-235,this.height-88,235,88);
   c.globalCompositeOperation='source-over';this.drawCount++;
  }
- destroy(){this.setState({active:false,animate:false});cancelAnimationFrame(this.measureFrame);removeEventListener('resize',this.onResize);this.scroller.removeEventListener('scroll',this.onScroll);}
+ destroy(){this.setState({active:false,animate:false});this.textObserver.disconnect();cancelAnimationFrame(this.measureFrame);removeEventListener('resize',this.onResize);this.scroller.removeEventListener('scroll',this.onScroll,true);}
 }
