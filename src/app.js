@@ -1,6 +1,6 @@
-import {chapters,works,whatsappNumber} from './content.js?v=4.6';
-import {WindSystem,motionConfig} from './wind.js?v=4.6';
-import {initAtelier} from './atelier.js?v=4.6';
+import {chapters,works,whatsappNumber} from './content.js?v=4.7';
+import {WindSystem,motionConfig} from './wind.js?v=4.7';
+import {initAtelier} from './atelier.js?v=4.7';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
@@ -28,7 +28,6 @@ function paint(){
  wind.setRegion(active);wind.progress=p*.25;
  document.body.dataset.chapter=sections[active].id;
  atelier?.onChapter(active,p);
- $('.mobile-chapter').textContent=active?chapters[active-1].title:'';
  document.documentElement.classList.toggle('reduced-motion',wind.reduced.matches);
  camera.style.transform=wind.reduced.matches||wind.paused?'':'translate3d(0,'+(-p*2).toFixed(2)+'%,0) scale('+(1+p*motionConfig.portalZoom).toFixed(3)+')';
  sequence.dataset.progress=p.toFixed(3);
