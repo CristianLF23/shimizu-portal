@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4
+# SHIMIZU · Portal V4.1
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.1
 
 ## Executar
 
@@ -14,7 +14,7 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.1. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
 
@@ -48,6 +48,7 @@ Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 d
 - `src/app.js`: rolagem, galerias, gaveta e âncoras.
 - `src/atelier.js`: revelações, explorador de arte e etapas interativas.
 - `src/atmosphere.js`: névoa, reflexos e ondas de água.
+- `src/ink.js`: desenho original a pincel, formado em seis etapas.
 - `src/wind.js` e `src/cloth.js`: vento, pétalas e malha física das bandeiras.
 - `src/content.js`: obras, descrições e contato.
 - `assets/art`: arquivos reais fornecidos.
@@ -57,11 +58,11 @@ Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 d
 O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
 ```text
-node qa/v4-qa.mjs
-node qa/v4-interactions.mjs
+node qa/v4.1-qa.mjs
+node qa/ink-qa.mjs
 ```
 
-O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica as interações novas, o diálogo, o Processo e a atmosfera. Os relatórios de execução acompanham a entrega.
+O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica a pintura progressiva, avanço e retorno das etapas, pausa, menu, diálogo e movimento reduzido. Os relatórios de execução acompanham a entrega.
 
 Verificação em Chromium local por CDP, pois a ponte do navegador integrado estava indisponível. Safari real, aparelhos físicos e desempenho de 60 fps não estão certificados. Sem JavaScript, conteúdo e links reais continuam acessíveis; os efeitos e o explorador ampliado são melhorias progressivas.
 
@@ -74,3 +75,9 @@ Referências pesquisadas antes da implementação, usadas para princípios de ri
 - https://www.siteinspire.com/website/13644-iwonderu-studios
 
 Os mockups e arquivos da artista fornecidos na conversa permanecem a principal referência de identidade.
+
+## V4.1 · Desenho a pincel ao longo da visita
+
+A referência adicional do usuário é um caderno com lanterna e telhados desenhados a pincel. Uma ilustração própria ocupa a margem inferior esquerda e recebe novas pinceladas em cada um dos seis capítulos: primeiro gesto, lanterna, telhado, segundo telhado, estrutura e ramo florido com selo. Traços têm pressão variável, cerdas separadas e falhas de pigmento. A mudança de dobra preserva o desenho; voltar reduz à etapa anterior. O salto direto por menu completa o que veio antes e anima somente a etapa atual. No Processo, a cor muda para carvão.
+
+A cena fica estática com pausa manual ou movimento reduzido e desaparece durante menu/visualizador; aba oculta interrompe execução. Arte original decorativa, não trabalho da tatuadora. Sem biblioteca ou asset novo. Implementação: src/ink.js, integrado ao ciclo existente em src/atelier.js, canvas decorativo em index.html e posicionamento em src/atelier.css. A versão continua com seis dobras e os mesmos contatos e obras.

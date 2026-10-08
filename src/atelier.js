@@ -1,10 +1,12 @@
-import {AtelierAtmosphere} from './atmosphere.js?v=4';
-import {works,availableDesigns,whatsappNumber} from './content.js?v=4';
+import {AtelierAtmosphere} from './atmosphere.js?v=4.1';
+import {InkCompanion} from './ink.js?v=4.1';
+import {works,availableDesigns,whatsappNumber} from './content.js?v=4.1';
 
 const gsap=window.gsap;
 export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  const scene=document.querySelector('.scene'),viewer=document.querySelector('#art-viewer');
  const atmosphere=new AtelierAtmosphere(document.querySelector('#water-atmosphere'),scene);
+ const ink=new InkCompanion(document.querySelector('#ink-companion'),scroller);
  const finePointer=matchMedia('(hover:hover) and (pointer:fine)');
  const chapters=[...scroller.children];
  const seen=new Set();let chapter=0,opener=null,pool=[],viewerIndex=0,closing=false;
@@ -14,6 +16,7 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  const own=tl=>{timelines.add(tl);tl.eventCallback('onComplete',()=>timelines.delete(tl));return tl;};
  function sync(){
   const active=canMove();
+  ink.setState({active:!document.hidden&&!viewer.open&&!document.body.classList.contains('menu-open'),animate:enabled()});
   atmosphere.setEnabled(active&&chapter===0);wind.sync();
   document.documentElement.classList.toggle('atelier-still',!active);
   if(!active){for(const tl of timelines)tl.progress(1).kill();timelines.clear();gsap.set(scene,{'--gaze-x':'0px','--gaze-y':'0px'});}
@@ -33,6 +36,7 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  }
  function onChapter(index,progress){
   if(index!==chapter){chapter=index;sync();reveal(index);}
+  ink.setChapter(index);
   chapters.forEach((s,i)=>s.classList.toggle('chapter-current',i===index));
   document.querySelectorAll('.chapter-rail a').forEach((a,i)=>a.toggleAttribute('data-active',i===index));
   scene.style.setProperty('--passage',Math.min(1,progress));
@@ -109,5 +113,5 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  document.addEventListener('visibilitychange',sync);
  document.fonts.ready.then(()=>{if(!location.hash||location.hash==='#inicio')reveal(0);});
  sync();
- return{onChapter,onWork,sync,atmosphere,viewer,openViewer,closeViewer};
+ return{onChapter,onWork,sync,atmosphere,ink,viewer,openViewer,closeViewer};
 }

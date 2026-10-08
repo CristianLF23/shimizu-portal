@@ -1,4 +1,5 @@
 /* SHIMIZU V4: an atelier of ink, wind and paper. */
+.ink-companion{position:fixed;inset:0;width:100%;height:100%;z-index:15;pointer-events:none;contain:strict}
 :root{--display:'Bodoni Moda',Georgia,serif;--utility:'IBM Plex Sans Condensed',Arial,sans-serif;--copper:#c25b45;--bone:#ede5d9}
 .svg-library{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
 body{font-family:var(--utility)}
