@@ -1,6 +1,6 @@
-import {AtelierAtmosphere} from './atmosphere.js?v=4.4';
-import {InkCompanion} from './ink.js?v=4.4';
-import {works,availableDesigns,whatsappNumber} from './content.js?v=4.4';
+import {AtelierAtmosphere} from './atmosphere.js?v=4.5';
+import {InkCompanion} from './ink.js?v=4.5';
+import {works,availableDesigns,whatsappNumber} from './content.js?v=4.5';
 
 const gsap=window.gsap;
 export function initAtelier({wind,scroller,getWorkIndex,showWork}){
@@ -57,7 +57,7 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  const ritual=document.querySelector('#wind-ritual');
  ritual.addEventListener('click',()=>{
   if(!enabled()){document.querySelector('#page-status').textContent='O movimento está pausado. Você pode ativá-lo no menu.';return;}
-  wind.impulse=4.4;atmosphere.burst(scene.clientWidth*.67,scene.clientHeight*.84);
+  wind.impulse=4.5;atmosphere.burst(scene.clientWidth*.67,scene.clientHeight*.84);
   gsap.fromTo(ritual.querySelector('.wind-symbol'),{rotate:-12},{rotate:0,duration:1.1,ease:'elastic.out(1,.4)'});
  });
  for(const sheet of document.querySelectorAll('.available-surface a')){

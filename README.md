@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.4
+# SHIMIZU · Portal V4.5
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.4
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.5
 
 ## Executar
 
@@ -14,7 +14,7 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.4. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.5. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
 
@@ -101,3 +101,5 @@ Arquivos desta revisão: `src/ink.js`, `src/atelier.css`, `index.html` e versõe
 
 ## V4.4 mobile
 Pinceladas independentes no topo do Processo, folha decorativa removida da Artista e exceções explícitas de sobreposição: Processo acima dos elementos; Contato acima dos botões. Canvas sem captura de toque, posição e escala mantidas. Desktop preservado. QA em qa/mobile-v4.4.mjs.
+
+V4.5: ramo superior no Processo mobile, crescimento da direita para esquerda e floração sequencial. Respeita pausa e movimento reduzido.
