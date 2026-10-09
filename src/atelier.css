@@ -243,6 +243,37 @@ body[data-chapter=processo]:not(.menu-open) .brand-lockup small,body[data-chapte
 /* Desktop compositions: related content shares one flow instead of distant anchors. */
 .desktop-editorial{display:contents}
 .available-set{display:none}
+.japanese-atmosphere{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:paint}
+.japanese-atmosphere .ink-motif{position:absolute;height:auto;max-width:none;pointer-events:none;opacity:var(--motif-opacity,.3);transform:rotate(var(--motif-angle,0deg));animation:ink-tide 22s ease-in-out infinite alternate;animation-play-state:paused;transform-origin:50% 70%}
+.chapter-current .japanese-atmosphere .ink-motif{animation-play-state:running}
+.ink-motif-secondary{--motif-opacity:.18;animation-delay:-11s!important}
+.works-section .motif-oni{width:clamp(200px,16vw,300px);left:43%;top:9%;--motif-angle:12deg}
+.works-section .motif-wind{width:42%;left:12%;bottom:-15%;--motif-angle:-8deg}
+.artist-section .motif-peony{width:clamp(240px,25vw,460px);right:-8%;bottom:-8%;--motif-angle:-16deg;--motif-opacity:.25}
+.artist-section .motif-wind{width:40%;left:43%;top:-8%;--motif-angle:7deg;--motif-opacity:.13}
+.process-section .motif-wind{width:44%;left:-8%;bottom:-18%;filter:brightness(.42);--motif-opacity:.16}
+.process-section .motif-peony{width:22%;right:-8%;top:4%;filter:brightness(.45);--motif-angle:18deg;--motif-opacity:.24}
+.available-section .motif-oni{width:clamp(200px,18vw,290px);left:24%;bottom:-20%;--motif-angle:-12deg;--motif-opacity:.3}
+.available-section .motif-wind{width:44%;left:8%;top:-9%;--motif-angle:4deg}
+.contact-section .motif-peony{width:clamp(240px,24vw,440px);left:29%;top:-13%;--motif-angle:18deg;--motif-opacity:.29}
+.contact-section .motif-wind{width:43%;left:12%;bottom:-6%;--motif-angle:-9deg}
+@keyframes ink-tide{from{transform:translate3d(0,0,0) rotate(var(--motif-angle,0deg))}to{transform:translate3d(0,-7px,0) rotate(calc(var(--motif-angle,0deg) + 1.5deg))}}
+.atelier-still .japanese-atmosphere .ink-motif{animation-play-state:paused}
+@media(max-width:1000px){
+ .japanese-atmosphere .ink-motif{animation:none;--motif-opacity:.2}
+ .japanese-atmosphere .ink-motif-secondary{--motif-opacity:.12}
+ .works-section .motif-oni{width:175px;left:-65px;top:53%;--motif-opacity:.19}
+ .works-section .motif-wind{width:80%;left:24%;bottom:-5%}
+ .artist-section .motif-peony{width:230px;right:-105px;bottom:8%;--motif-opacity:.18}
+ .artist-section .motif-wind{width:80%;left:-22%;top:50%}
+ .process-section .motif-wind{width:80%;left:31%;bottom:12%;--motif-opacity:.1}
+ .process-section .motif-peony{display:none}
+ .available-section .motif-oni{width:175px;left:auto;right:-95px;top:44%;bottom:auto;--motif-opacity:.17}
+ .available-section .motif-wind{width:75%;left:42%;top:12%}
+ .contact-section .motif-peony{width:180px;left:-93px;top:48%;--motif-opacity:.21}
+ .contact-section .motif-wind{width:100%;left:10%;bottom:-4%}
+}
+@media(prefers-reduced-motion:reduce){.japanese-atmosphere .ink-motif{animation:none!important}}
 @media(min-width:1001px){
  .desktop-editorial{position:absolute;display:flex;flex-direction:column;z-index:6;left:7.5%;width:41%;top:50%;transform:translateY(-50%);gap:28px}
  .desktop-editorial .section-heading{position:relative;inset:auto;width:100%}

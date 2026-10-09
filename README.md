@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.8
+# SHIMIZU · Portal V4.9
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.8
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.9
 
 ## Executar
 
@@ -14,9 +14,11 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.8. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.9. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
+
+- Ornamentos originais de oni, peônia e faixas de vento, em SVG. Contornos de tinta nas margens das cinco dobras de conteúdo, com oscilação lenta apenas no capítulo ativo; estáticos no celular e com movimento reduzido.
 
 - Kaisei Tokumin nos títulos, Yuji Syuku na frase inicial e inscrição; IBM Plex Sans Condensed na interface e Bodoni Moda nos detalhes editoriais. Fontes locais.
 - Portal com quatro bandeiras de tecido presas à viga, rajadas, pétalas, névoa, reflexos e reação sutil ao cursor. SOPRAR cria uma rajada e ondas na água.
@@ -104,11 +106,11 @@ Pinceladas independentes no topo do Processo, folha decorativa removida da Artis
 
 V4.5: ramo superior no Processo mobile, crescimento da direita para esquerda e floração sequencial. Respeita pausa e movimento reduzido.
 
-V4.8: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
+V4.9: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
 
 
-## V4.8: composição desktop
+## V4.9: composição desktop
 
 Trabalhos reúne texto, miniaturas, setas e contador em um fluxo único. Quatro miniaturas e parte da próxima em telas grandes; três e parte da próxima nas menores. Foto principal completa, com ampliação controlada. Artista mostra o gesto e o estúdio, com inscrição menor. Processo usa uma mesa de materiais em escalas distintas, preservando as cinco etapas clicáveis. Disponíveis reúne instrução, contador de folhas e ação, com composição assimétrica próxima ao texto. Contato tem foto reenquadrada, rodapé mais simples e WhatsApp persistente compacto nessa dobra. A abertura mantém a cena, com convite de vento refinado.
 
-Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.8-qa.mjs, qa/mobile-v4.8.mjs e qa/desktop-v4.8-behavior.mjs.
+Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.9-qa.mjs, qa/mobile-v4.9.mjs e qa/desktop-v4.9-behavior.mjs.
