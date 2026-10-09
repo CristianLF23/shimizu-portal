@@ -1,6 +1,7 @@
-import {chapters,works,whatsappNumber} from './content.js?v=4.11';
-import {WindSystem,motionConfig} from './wind.js?v=4.11';
-import {initAtelier} from './atelier.js?v=4.11';
+import {chapters,works,whatsappNumber} from './content.js?v=4.12';
+import {WindSystem,motionConfig} from './wind.js?v=4.12';
+import {initAtelier} from './atelier.js?v=4.12';
+import {initEntrance} from './entrance.js?v=4.12';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
@@ -119,4 +120,5 @@ if(/^\d{10,15}$/.test(whatsappNumber)){
 atelier=initAtelier({wind,scroller,getWorkIndex:()=>workIndex,showWork});
 export {atelier};
 updateMotion();measure();restoreHash();
+export const entrance=initEntrance({wind,atelier});
 

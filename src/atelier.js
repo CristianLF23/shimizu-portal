@@ -1,6 +1,6 @@
-import {AtelierAtmosphere} from './atmosphere.js?v=4.11';
-import {InkCompanion} from './ink.js?v=4.11';
-import {works,availableDesigns,whatsappNumber} from './content.js?v=4.11';
+import {AtelierAtmosphere} from './atmosphere.js?v=4.12';
+import {InkCompanion} from './ink.js?v=4.12';
+import {works,availableDesigns,whatsappNumber} from './content.js?v=4.12';
 
 const gsap=window.gsap;
 export function initAtelier({wind,scroller,getWorkIndex,showWork}){
@@ -111,7 +111,13 @@ export function initAtelier({wind,scroller,getWorkIndex,showWork}){
  document.querySelector('#viewer-prev').addEventListener('click',()=>stepViewer(-1));
  viewer.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();stepViewer(e.key==='ArrowRight'?1:-1);}});
  document.addEventListener('visibilitychange',sync);
- document.fonts.ready.then(()=>{if(!location.hash||location.hash==='#inicio')reveal(0);});
+ document.fonts.ready.then(()=>{
+  const opening=()=>{if(!location.hash||location.hash==='#inicio')reveal(0);};
+  if(document.documentElement.classList.contains('entrance-pending')&&!document.documentElement.classList.contains('entrance-revealing')){
+   document.addEventListener('shimizu:entrance-reveal',opening,{once:true});
+   document.addEventListener('shimizu:entrance-expired',opening,{once:true});
+  }else opening();
+ });
  sync();
  return{onChapter,onWork,sync,atmosphere,ink,viewer,openViewer,closeViewer};
 }

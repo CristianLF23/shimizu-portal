@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.11
+# SHIMIZU · Portal V4.12
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.11
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.12
 
 ## Executar
 
@@ -14,9 +14,11 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.11. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.12. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
+
+- Entrada de 1,8 segundo a cada carregamento: selo, nome revelado pela tinta e rajada que descobre o portal e segue nas bandeiras. Movimento reduzido usa somente uma transição de opacidade de 160ms. Escape, Tab ou toque encerram a entrada imediatamente.
 
 - Trabalhos desktop em uma composição central com largura limitada: título, fotografia completa, prévia clicável do próximo trabalho e galeria na faixa inferior. Ramos floridos entram pelas bordas com a base fora do enquadramento.
 
@@ -30,7 +32,7 @@ Abra http://127.0.0.1:4177/?v=4.11. A pasta `dist` contém a versão estática. 
 - Sete estudos disponíveis em dois conjuntos de folhas, com inclinação no cursor e visualização ampliada. Disponibilidade comercial sob consulta.
 - Menu em gaveta, índice lateral no desktop, retorno de foco, Escape e atalhos de navegação. WhatsApp persistente na paleta vermelha do site.
 
-Cada capítulo ocupa uma tela, com rolagem nativa e alinhamento ao término. Galerias usam o eixo horizontal. O explorador de arte é um diálogo sobre o capítulo atual e conserva sua posição ao fechar. Não há troca de página, autoplay da galeria, interceptação de wheel/touch ou rolagem virtual.
+Cada capítulo ocupa uma tela, com rolagem nativa e alinhamento ao término. Galerias usam o eixo horizontal. O explorador de arte é um diálogo sobre o capítulo atual e conserva sua posição ao fechar. Não há troca de página, autoplay da galeria, rolagem virtual. Wheel/touch só ficam suspensos durante a entrada, por no máximo 3,6 segundos se os módulos falharem; depois a rolagem é nativa.
 
 O menu permite pausar os efeitos. Movimento reduzido, aba oculta e saída da Home interrompem a cena animada. A atmosfera usa Canvas 2D, DPR limitado a 1,5 e desenho reduzido para aproximadamente 30 atualizações/s no celular. Sem WebGL, áudio, analytics, formulário, CMS ou chamadas externas em tempo de execução.
 
@@ -62,10 +64,10 @@ Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 d
 O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
 ```text
-node qa/v4.11-qa.mjs
-node qa/desktop-v4.11-behavior.mjs
-node qa/branches-v4.11.mjs
-node qa/mobile-v4.11.mjs
+node qa/v4.12-qa.mjs
+node qa/desktop-v4.12-behavior.mjs
+node qa/branches-v4.12.mjs
+node qa/mobile-v4.12.mjs
 ```
 
 O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica a pintura progressiva, avanço e retorno das etapas, pausa, menu, diálogo e movimento reduzido. Os relatórios de execução acompanham a entrega.
@@ -113,8 +115,14 @@ V4.5: ramo superior no Processo mobile, crescimento da direita para esquerda e f
 V4.6: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
 
 
-## V4.11: composição desktop
+## V4.12: composição desktop
 
 Trabalhos tem uma área central limitada a 1440 px, com título, fotografia completa e uma prévia clicável do próximo trabalho. A galeria ocupa toda a faixa inferior e mostra cerca de sete miniaturas nas telas grandes e cinco nas menores. Contador, setas e ampliação continuam disponíveis. Os ramos partem das bordas com a base fora do enquadramento. Artista mostra o gesto e o estúdio, com inscrição menor. Processo usa uma mesa de materiais em escalas distintas, preservando as cinco etapas clicáveis. Disponíveis reúne instrução, contador de folhas e ação, com composição assimétrica próxima ao texto. Contato tem foto reenquadrada, rodapé mais simples e WhatsApp persistente compacto nessa dobra. A abertura mantém a cena, com convite de vento refinado.
 
-Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.11-qa.mjs, qa/mobile-v4.11.mjs e qa/desktop-v4.11-behavior.mjs.
+Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.12-qa.mjs, qa/mobile-v4.12.mjs e qa/desktop-v4.12-behavior.mjs.
+
+## V4.12: ritual de entrada
+
+A cada abertura ou recarga real, o selo é estampado, o nome surge com uma máscara e um traço de tinta, e uma rajada abre a camada escura. O vento segue na cena e nas bandeiras enquanto a frase da Home aparece. A sequência dura aproximadamente1,8s; não se repete durante navegação entre capítulos ou restauração do histórico. Hashes diretos continuam no capítulo solicitado.
+
+Escape, Tab e toque encerram a entrada. Movimento reduzido recebe somente fade de160ms. Conteúdo é carregado em paralelo; temporizadores independentes evitam bloqueio se o módulo ou a timeline falhar. Sem JavaScript a camada decorativa permanece oculta. Arquivos: `src/entrance.js`, `src/entrance.css`, bootstrap defensivo em `index.html` e sincronização de revelação em `src/atelier.js`. Verificação específica: `qa/entrance-v4.12.mjs`; evidências na entrega.

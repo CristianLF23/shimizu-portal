@@ -6,11 +6,33 @@
  <meta name="description" content="Entre no universo de Shimizu. Tatuagem oriental, desenhos e composições que encontram o corpo. Portfólio, processo e contato com a artista.">
  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%238f2520'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='serif' font-size='48' fill='%23e6d5bc'%3ES%3C/text%3E%3C/svg%3E">
  <link rel="preload" as="font" href="assets/fonts/editorial.woff2" type="font/woff2" crossorigin>
- <link rel="stylesheet" href="styles.css?v=4.11"><link rel="stylesheet" href="src/fonts.css?v=4.11"><link rel="stylesheet" href="src/atelier.css?v=4.11"><script defer src="assets/vendor/gsap-3.15.0.min.js"></script><script type="module" src="src/app.js?v=4.11"></script>
+ <link rel="preload" as="font" href="assets/fonts/kaisei-tokumin-latin-400.woff2" type="font/woff2" crossorigin>
+ <script>
+  // Fail open even when modules, animation assets or the network fail.
+  document.documentElement.classList.add('entrance-pending');
+  document.documentElement.dataset.entrance='waiting';
+  setTimeout(function(){
+   if(!document.documentElement.classList.contains('entrance-pending'))return;
+   document.dispatchEvent(new Event('shimizu:entrance-expired'));
+   document.documentElement.classList.remove('entrance-pending','entrance-revealing');
+   document.documentElement.dataset.entrance='complete';
+   var screen=document.querySelector('.entrance-screen');if(screen)screen.hidden=true;
+  },3600);
+ </script>
+ <link rel="stylesheet" href="styles.css?v=4.12"><link rel="stylesheet" href="src/fonts.css?v=4.12"><link rel="stylesheet" href="src/atelier.css?v=4.12"><link rel="stylesheet" href="src/entrance.css?v=4.12"><script defer src="assets/vendor/gsap-3.15.0.min.js"></script><script type="module" src="src/app.js?v=4.12"></script>
 </head>
 <body>
 <canvas id="ink-companion" class="ink-companion" aria-hidden="true" hidden></canvas>
 <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="shimizu-seal" viewBox="0 0 48 58"><path d="M5 4 42 2 44 53 3 56Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M34 14C27 5 10 12 13 22c2 7 22 5 22 15 0 10-20 13-25 3M31 12 17 47M12 10l24 37" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8 31 32-8M8 36l31-8" stroke="currentColor" stroke-width=".6"/></symbol></defs></svg>
+<div class="entrance-screen" aria-hidden="true">
+ <div class="entrance-curtain"></div>
+ <div class="entrance-mark">
+  <div class="entrance-signature"><svg class="entrance-seal" viewBox="0 0 48 58"><use href="#shimizu-seal"/></svg><span class="entrance-name">SHIMIZU</span><span class="entrance-ink"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  <svg class="entrance-stroke" viewBox="0 0 320 20"><path d="M8 13 49 11 82 12 116 9 139 10 178 7 201 9 238 6 263 8 310 5"/></svg>
+  <span class="entrance-caption">ARTE SOBRE A PELE</span>
+ </div>
+ <div class="entrance-petals"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
 <a href="#trabalhos" class="skip-link">Ir para os trabalhos</a>
 <header class="masthead">
  <a class="wordmark brand-lockup" href="#inicio" aria-label="Shimizu, início"><svg class="brand-seal" aria-hidden="true"><use href="#shimizu-seal"/></svg><span>SHIMIZU<small>ARTE SOBRE A PELE</small></span></a>
