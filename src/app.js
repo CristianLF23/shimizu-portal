@@ -1,6 +1,6 @@
-import {chapters,works,whatsappNumber} from './content.js?v=4.10';
-import {WindSystem,motionConfig} from './wind.js?v=4.10';
-import {initAtelier} from './atelier.js?v=4.10';
+import {chapters,works,whatsappNumber} from './content.js?v=4.11';
+import {WindSystem,motionConfig} from './wind.js?v=4.11';
+import {initAtelier} from './atelier.js?v=4.11';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
@@ -88,6 +88,9 @@ function showWork(index){
  workIndex=(index+works.length)%works.length;const w=works[workIndex],img=$('#work-image');
  img.src='assets/art/'+w.image+'.webp';img.alt=w.alt;
  img.style.objectPosition=w.position;
+ const next=works[(workIndex+1)%works.length],preview=$('.work-preview');
+ preview.querySelector('img').src='assets/art/'+next.image+'.webp';preview.querySelector('img').alt=next.alt;
+ preview.querySelector('.preview-title').textContent=next.title;preview.setAttribute('aria-label','Ver próximo trabalho: '+next.title);
  $('.work-count').textContent=String(workIndex+1).padStart(2,'0')+' / '+String(works.length).padStart(2,'0');
  $('.work-title').textContent=w.title;
  $('.work-name').textContent=w.title;$('.work-detail').textContent=w.detail;
@@ -98,6 +101,7 @@ function showWork(index){
  $('#page-status').textContent='Trabalho '+(workIndex+1)+' de '+works.length+': '+w.title;
 }
 document.querySelectorAll('[data-work]').forEach(b=>b.addEventListener('click',()=>showWork(workIndex+Number(b.dataset.work))));
+$('[data-preview-next]').addEventListener('click',()=>showWork(workIndex+1));
 document.querySelectorAll('[data-work-select]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showWork(Number(b.dataset.workSelect));if(innerWidth<=600&&$('.work-hero').getBoundingClientRect().bottom<100)$('#trabalhos').scrollIntoView({behavior:wind.reduced.matches?'instant':'smooth',block:'start'});}));
 $('#trabalhos').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();showWork(workIndex+(e.key==='ArrowRight'?1:-1));}});
 let touchX=0,touchY=0;

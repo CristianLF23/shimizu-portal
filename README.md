@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.10
+# SHIMIZU · Portal V4.11
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.10
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.11
 
 ## Executar
 
@@ -14,9 +14,11 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.10. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.11. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
+
+- Trabalhos desktop em uma composição central com largura limitada: título, fotografia completa, prévia clicável do próximo trabalho e galeria na faixa inferior. Ramos floridos entram pelas bordas com a base fora do enquadramento.
 
 - Ramos de flores do próprio sistema visual preenchem as margens das dobras, sem novos desenhos de máscaras ou faixas de vento.
 
@@ -60,8 +62,10 @@ Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 d
 O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
 ```text
-node qa/v4.2-qa.mjs
-node qa/ink-safe-qa.mjs
+node qa/v4.11-qa.mjs
+node qa/desktop-v4.11-behavior.mjs
+node qa/branches-v4.11.mjs
+node qa/mobile-v4.11.mjs
 ```
 
 O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica a pintura progressiva, avanço e retorno das etapas, pausa, menu, diálogo e movimento reduzido. Os relatórios de execução acompanham a entrega.
@@ -106,11 +110,11 @@ Pinceladas independentes no topo do Processo, folha decorativa removida da Artis
 
 V4.5: ramo superior no Processo mobile, crescimento da direita para esquerda e floração sequencial. Respeita pausa e movimento reduzido.
 
-V4.10: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
+V4.11: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
 
 
-## V4.10: composição desktop
+## V4.11: composição desktop
 
 Trabalhos reúne texto, miniaturas, setas e contador em um fluxo único. Quatro miniaturas e parte da próxima em telas grandes; três e parte da próxima nas menores. Foto principal completa, com ampliação controlada. Artista mostra o gesto e o estúdio, com inscrição menor. Processo usa uma mesa de materiais em escalas distintas, preservando as cinco etapas clicáveis. Disponíveis reúne instrução, contador de folhas e ação, com composição assimétrica próxima ao texto. Contato tem foto reenquadrada, rodapé mais simples e WhatsApp persistente compacto nessa dobra. A abertura mantém a cena, com convite de vento refinado.
 
-Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.10-qa.mjs, qa/mobile-v4.10.mjs e qa/desktop-v4.10-behavior.mjs.
+Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.11-qa.mjs, qa/mobile-v4.11.mjs e qa/desktop-v4.11-behavior.mjs.
