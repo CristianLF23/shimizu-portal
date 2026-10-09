@@ -9,6 +9,7 @@
 .entrance-signature{position:relative;display:flex;align-items:center;gap:clamp(18px,2.6vw,34px)}
 .entrance-seal{width:clamp(37px,4vw,57px);height:clamp(46px,5vw,70px);color:#bb4635;transform:rotate(-4deg);overflow:visible;opacity:0}
 .entrance-name{font:400 clamp(38px,5.8vw,86px)/1.2 'Kaisei Tokumin',Georgia,serif;letter-spacing:.12em;padding-bottom:.12em;clip-path:inset(0 100% 0 0)}
+.entrance-kanji{display:block;width:clamp(165px,23vw,310px);height:auto;aspect-ratio:200.6/97.4;padding:0;overflow:visible}
 .entrance-stroke{display:block;width:70%;height:20px;margin:10px 0 12px auto;overflow:visible;opacity:0}
 .entrance-stroke path{fill:none;stroke:#b74432;stroke-width:2.1;stroke-linecap:square;stroke-linejoin:bevel}
 .entrance-caption{display:block;padding-left:55px;color:#b3a291;font:400 11px/1.5 var(--utility,Arial,sans-serif);letter-spacing:.29em;opacity:0}

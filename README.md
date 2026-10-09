@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.12.2
+# SHIMIZU · Portal V4.13
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.12.2
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.13
 
 ## Executar
 
@@ -14,9 +14,11 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.12.2. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.13. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
+
+- Assinatura principal 清水 em vetores de caligrafia, acompanhada por SHIMIZU. Cabeçalho, selo, entrada e favicon usam a mesma identidade; a entrada conserva a revelação progressiva sem flash inicial.
 
 - Entrada de 1,8 segundo a cada carregamento: selo, nome revelado pela tinta e rajada que descobre o portal e segue nas bandeiras. Movimento reduzido usa somente uma transição de opacidade de 160ms. Escape, Tab ou toque encerram a entrada imediatamente.
 
@@ -46,6 +48,8 @@ WhatsApp confirmado: +55 11 95371 7745. Instagram: https://www.instagram.com/shi
 
 Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 distribuído localmente sob a licença padrão indicada em `assets/vendor/GSAP-LICENSE.txt`, preservando o cabeçalho original. Nenhum pacote pago ou serviço externo foi contratado.
 
+A assinatura utiliza contornos originais de Yuji Syuku (Yuji Project / Kinuta Font Factory), sob OFL 1.1, extraídos para SVG sem depender de uma fonte adicional no navegador. Origem e licença em `assets/identity/README.md`.
+
 ## Arquivos principais
 
 - `index.html`: conteúdo semântico, navegação, controles e diálogo.
@@ -64,10 +68,11 @@ Fontes sob SIL Open Font License, com licenças em `assets/fonts`. GSAP 3.15.0 d
 O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
 ```text
-node qa/v4.12.1-qa.mjs
-node qa/desktop-v4.12.1-behavior.mjs
-node qa/branches-v4.12.1.mjs
-node qa/mobile-v4.12.1.mjs
+node qa/v4.13-qa.mjs
+node qa/desktop-v4.13-behavior.mjs
+node qa/logo-v4.13.mjs
+node qa/entrance-v4.13.mjs
+node qa/mobile-v4.13.mjs
 ```
 
 O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica a pintura progressiva, avanço e retorno das etapas, pausa, menu, diálogo e movimento reduzido. Os relatórios de execução acompanham a entrega.
@@ -129,6 +134,6 @@ Escape, Tab e toque encerram a entrada. Movimento reduzido recebe somente fade d
 
 Correção da primeira pintura: selo e legenda com opacity0, nome com máscara100% e traço oculto são definidos no CSS antes do JavaScript. O traço só fica visível depois de configurar seu dash. Isso impede que a marca completa apareça antes de ser construída.
 
-## V4.12.2: rodapé mobile
+## V4.13: rodapé mobile
 
 O nome Shimizu do rodapé da dobra de Contato fica oculto até1000px, liberando a pintura fixa. TOPO permanece à direita. Logo do cabeçalho e rodapé desktop preservados. Cache do stylesheet atelier atualizado, sem alterar módulos ou motion.
