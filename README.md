@@ -110,11 +110,11 @@ Pinceladas independentes no topo do Processo, folha decorativa removida da Artis
 
 V4.5: ramo superior no Processo mobile, crescimento da direita para esquerda e floração sequencial. Respeita pausa e movimento reduzido.
 
-V4.11: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
+V4.6: Kaisei Tokumin400 nos títulos de seção e visualizador; Yuji Syuku400 na frase inicial e inscrição da artista. Fontes latinas locais com acentos e licença OFL. Sem itálico artificial, corpo e navegação preservados.
 
 
 ## V4.11: composição desktop
 
-Trabalhos reúne texto, miniaturas, setas e contador em um fluxo único. Quatro miniaturas e parte da próxima em telas grandes; três e parte da próxima nas menores. Foto principal completa, com ampliação controlada. Artista mostra o gesto e o estúdio, com inscrição menor. Processo usa uma mesa de materiais em escalas distintas, preservando as cinco etapas clicáveis. Disponíveis reúne instrução, contador de folhas e ação, com composição assimétrica próxima ao texto. Contato tem foto reenquadrada, rodapé mais simples e WhatsApp persistente compacto nessa dobra. A abertura mantém a cena, com convite de vento refinado.
+Trabalhos tem uma área central limitada a 1440 px, com título, fotografia completa e uma prévia clicável do próximo trabalho. A galeria ocupa toda a faixa inferior e mostra cerca de sete miniaturas nas telas grandes e cinco nas menores. Contador, setas e ampliação continuam disponíveis. Os ramos partem das bordas com a base fora do enquadramento. Artista mostra o gesto e o estúdio, com inscrição menor. Processo usa uma mesa de materiais em escalas distintas, preservando as cinco etapas clicáveis. Disponíveis reúne instrução, contador de folhas e ação, com composição assimétrica próxima ao texto. Contato tem foto reenquadrada, rodapé mais simples e WhatsApp persistente compacto nessa dobra. A abertura mantém a cena, com convite de vento refinado.
 
 Ajustes de layout restritos a desktop acima de 1000 px. Mobile preserva a composição anterior, a pintura fixa e as exceções de sobreposição autorizadas. Sem novas dependências. Verificação: qa/v4.11-qa.mjs, qa/mobile-v4.11.mjs e qa/desktop-v4.11-behavior.mjs.
