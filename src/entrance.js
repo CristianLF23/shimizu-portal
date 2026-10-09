@@ -61,6 +61,7 @@ export function initEntrance({wind,atelier}){
    const name=screen.querySelector('.entrance-name'),stroke=screen.querySelector('.entrance-stroke path');
    const length=stroke.getTotalLength();
    gsap.set(stroke,{strokeDasharray:length,strokeDashoffset:length});
+   gsap.set(screen.querySelector('.entrance-stroke'),{opacity:1});
    timeline=gsap.timeline({paused:true,defaults:{ease:'power3.out'},onComplete:finish});
    timeline.addLabel('stamp',.04)
     .fromTo(seal,{opacity:0,scale:1.45,rotate:-13},{opacity:1,scale:1,rotate:-4,duration:.3,ease:'back.out(1.4)'},'stamp')

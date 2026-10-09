@@ -7,11 +7,11 @@
 .entrance-curtain:after{content:'';position:absolute;inset:0;background:url('../assets/paper.webp') center/130% auto no-repeat;opacity:.04;mix-blend-mode:screen}
 .entrance-mark{position:relative;width:max-content;max-width:90%;text-align:center;margin-top:-3vh;color:var(--bone,#ede5d9)}
 .entrance-signature{position:relative;display:flex;align-items:center;gap:clamp(18px,2.6vw,34px)}
-.entrance-seal{width:clamp(37px,4vw,57px);height:clamp(46px,5vw,70px);color:#bb4635;transform:rotate(-4deg);overflow:visible}
-.entrance-name{font:400 clamp(38px,5.8vw,86px)/1.2 'Kaisei Tokumin',Georgia,serif;letter-spacing:.12em;padding-bottom:.12em}
-.entrance-stroke{display:block;width:70%;height:20px;margin:10px 0 12px auto;overflow:visible}
+.entrance-seal{width:clamp(37px,4vw,57px);height:clamp(46px,5vw,70px);color:#bb4635;transform:rotate(-4deg);overflow:visible;opacity:0}
+.entrance-name{font:400 clamp(38px,5.8vw,86px)/1.2 'Kaisei Tokumin',Georgia,serif;letter-spacing:.12em;padding-bottom:.12em;clip-path:inset(0 100% 0 0)}
+.entrance-stroke{display:block;width:70%;height:20px;margin:10px 0 12px auto;overflow:visible;opacity:0}
 .entrance-stroke path{fill:none;stroke:#b74432;stroke-width:2.1;stroke-linecap:square;stroke-linejoin:bevel}
-.entrance-caption{display:block;padding-left:55px;color:#b3a291;font:400 11px/1.5 var(--utility,Arial,sans-serif);letter-spacing:.29em}
+.entrance-caption{display:block;padding-left:55px;color:#b3a291;font:400 11px/1.5 var(--utility,Arial,sans-serif);letter-spacing:.29em;opacity:0}
 .entrance-ink{position:absolute;left:0;top:0;width:57px;height:70px;pointer-events:none}
 .entrance-ink i{position:absolute;background:#a63226;width:3px;height:2px;opacity:0;transform-origin:center;border-radius:40% 20% 45% 35%}
 .entrance-ink i:nth-child(1){left:-9px;top:16px}.entrance-ink i:nth-child(2){left:-5px;top:50px;width:2px}

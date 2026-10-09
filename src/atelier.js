@@ -1,6 +1,6 @@
-import {AtelierAtmosphere} from './atmosphere.js?v=4.12';
-import {InkCompanion} from './ink.js?v=4.12';
-import {works,availableDesigns,whatsappNumber} from './content.js?v=4.12';
+import {AtelierAtmosphere} from './atmosphere.js?v=4.12.1';
+import {InkCompanion} from './ink.js?v=4.12.1';
+import {works,availableDesigns,whatsappNumber} from './content.js?v=4.12.1';
 
 const gsap=window.gsap;
 export function initAtelier({wind,scroller,getWorkIndex,showWork}){
