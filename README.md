@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.12.1
+# SHIMIZU · Portal V4.12.2
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.12.1
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.12.2
 
 ## Executar
 
@@ -14,7 +14,7 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.12.1. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.12.2. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
 
@@ -128,3 +128,7 @@ A cada abertura ou recarga real, o selo é estampado, o nome surge com uma másc
 Escape, Tab e toque encerram a entrada. Movimento reduzido recebe somente fade de160ms. Conteúdo é carregado em paralelo; temporizadores independentes evitam bloqueio se o módulo ou a timeline falhar. Sem JavaScript a camada decorativa permanece oculta. Arquivos: `src/entrance.js`, `src/entrance.css`, bootstrap defensivo em `index.html` e sincronização de revelação em `src/atelier.js`. Verificação específica: `qa/entrance-v4.12.1.mjs`; evidências na entrega.
 
 Correção da primeira pintura: selo e legenda com opacity0, nome com máscara100% e traço oculto são definidos no CSS antes do JavaScript. O traço só fica visível depois de configurar seu dash. Isso impede que a marca completa apareça antes de ser construída.
+
+## V4.12.2: rodapé mobile
+
+O nome Shimizu do rodapé da dobra de Contato fica oculto até1000px, liberando a pintura fixa. TOPO permanece à direita. Logo do cabeçalho e rodapé desktop preservados. Cache do stylesheet atelier atualizado, sem alterar módulos ou motion.
