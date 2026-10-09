@@ -1,6 +1,6 @@
-import {chapters,works,whatsappNumber} from './content.js?v=4.7';
-import {WindSystem,motionConfig} from './wind.js?v=4.7';
-import {initAtelier} from './atelier.js?v=4.7';
+import {chapters,works,whatsappNumber} from './content.js?v=4.8';
+import {WindSystem,motionConfig} from './wind.js?v=4.8';
+import {initAtelier} from './atelier.js?v=4.8';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
@@ -107,7 +107,7 @@ const designs=$('.available-gallery'),designNext=$('#available-next');
 function changeDesignGroup(){const next=Math.round(designs.scrollLeft/designs.clientWidth)===0?1:0;designs.scrollTo({left:next*designs.clientWidth,behavior:wind.reduced.matches||wind.paused?'instant':'smooth'});}
 designNext.addEventListener('click',changeDesignGroup);
 designs.addEventListener('keydown',e=>{if(e.target!==designs)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();changeDesignGroup();}});
-designs.addEventListener('scroll',()=>{const second=designs.scrollLeft>designs.clientWidth*.5;designNext.firstChild.textContent=second?'VER PRIMEIROS DISPONÍVEIS':'VER OUTROS DISPONÍVEIS';designNext.setAttribute('aria-label',second?'Ver primeiro conjunto de estudos':'Ver segundo conjunto de estudos');},{passive:true});
+designs.addEventListener('scroll',()=>{const second=designs.scrollLeft>designs.clientWidth*.5;designNext.firstChild.textContent=second?'VER PRIMEIROS DISPONÍVEIS':'VER OUTROS DISPONÍVEIS';designNext.setAttribute('aria-label',second?'Ver primeiro conjunto de estudos':'Ver segundo conjunto de estudos');$('.available-set').textContent=second?'FOLHAS 05 A 07 / 07':'FOLHAS 01 A 04 / 07';},{passive:true});
 const whatsapp=$('#whatsapp-contact');
 if(/^\d{10,15}$/.test(whatsappNumber)){
  whatsapp.href='https://wa.me/'+whatsappNumber+'?text='+encodeURIComponent('Olá, Shimizu! Gostaria de conversar sobre uma tatuagem.');whatsapp.hidden=false;
