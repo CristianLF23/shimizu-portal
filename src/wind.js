@@ -1,4 +1,4 @@
-import {ClothFlag} from './cloth.js?v=4.14';
+import {ClothFlag} from './cloth.js?v=4.15';
 export const motionConfig={intensity:.8,gustStrength:1.8,portalZoom:.02,particlesDesktop:60,particlesMobile:36,petalFallRate:1.5};
 export class WindSystem {
  constructor(scene){
@@ -25,11 +25,13 @@ export class WindSystem {
   const x=(r.left-cr.left)/zoom+(w-this.backdrop.naturalWidth*scale)*(position[0]/100),y=(r.top-cr.top)/zoom+(h-this.backdrop.naturalHeight*scale)*(position[1]/100);
   const portrait=this.backdrop.currentSrc.includes('mobile'),start=portrait?.31:.35,end=portrait?.69:.63,beamY=portrait?.229:.173,beamSlope=portrait?0:.034;
   const span=(end-start)*this.backdrop.naturalWidth*scale,width=Math.min(125,span*.24),height=Math.min(this.scene.clientHeight*.28,width*3.1);
+  const placements=[];
   for(let i=0;i<this.objects.length;i++){
    const flag=this.objects[i],u=start+(end-start)*i/3,rope=width*(.35+(i%2)*.12);
    flag.el.style.left=`${x+u*this.backdrop.naturalWidth*scale-width/2}px`;flag.el.style.top=`${y+(beamY+beamSlope*i/3)*this.backdrop.naturalHeight*scale}px`;
-   flag.el.style.width=`${width}px`;flag.el.style.height=`${height+rope}px`;flag.el.style.setProperty('--cord-length',`${rope}px`);flag.resize();
+   flag.el.style.width=`${width}px`;flag.el.style.height=`${height+rope}px`;flag.el.style.setProperty('--cord-length',`${rope}px`);placements.push(flag);
   }
+  for(const flag of placements)flag.resize();
  }
  gust(){if(!this.reduced.matches&&!this.paused)this.impulse=motionConfig.gustStrength;}
  setRegion(value){if(this.region!==value){this.region=value;this.sync();}}
@@ -45,12 +47,14 @@ export class WindSystem {
   const t=this.time,breeze=(Math.sin(t*.63)+Math.sin(t*1.13+1.6)*.45)*motionConfig.intensity+this.impulse+this.pointerX*.9;
   while(this.accumulator>=1/60){for(const flag of this.objects)flag.step(1/60,t,breeze);this.accumulator-=1/60;}
   if(!this.mobile.matches||!this.lastDraw||now-this.lastDraw>=30){for(const flag of this.objects)flag.draw();this.lastDraw=now;}
+  // Read the scene once before writing particle transforms, rather than per petal.
+  const width=this.scene.clientWidth,height=this.scene.clientHeight;
   const count=this.mobile.matches?motionConfig.particlesMobile:motionConfig.particlesDesktop;
   for(let i=0;i<this.petals.length;i++){
    const p=this.petals[i];p.el.hidden=i>=count;if(i>=count)continue;p.x+=dt*(.018+breeze*.018)*p.depth;p.y+=dt*p.speed*p.depth*motionConfig.petalFallRate;
    if(p.y>1.06){p.y=-.06;p.x=(i*.193+t*.087)%1;}if(p.x>1.1)p.x=-.1;if(p.x<-.1)p.x=1.1;
-   const flutter=Math.sin(t*1.6+p.phase),x=p.x*this.scene.clientWidth+Math.sin(t*.8+p.phase)*28;
-   p.el.style.transform=`translate3d(${x.toFixed(1)}px,${(p.y*this.scene.clientHeight+flutter*13).toFixed(1)}px,0) rotate(${(t*35+p.phase*80).toFixed(1)}deg) rotateY(${(flutter*70).toFixed(1)}deg) scale(${p.depth})`;
+   const flutter=Math.sin(t*1.6+p.phase),x=p.x*width+Math.sin(t*.8+p.phase)*28;
+   p.el.style.transform=`translate3d(${x.toFixed(1)}px,${(p.y*height+flutter*13).toFixed(1)}px,0) rotate(${(t*35+p.phase*80).toFixed(1)}deg) rotateY(${(flutter*70).toFixed(1)}deg) scale(${p.depth})`;
   }
   this.frame=requestAnimationFrame(this.tick);
  }

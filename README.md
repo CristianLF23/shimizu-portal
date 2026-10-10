@@ -1,8 +1,8 @@
-# SHIMIZU · Portal V4.14
+# SHIMIZU · Portal V4.15
 
 Atelier vivo de tinta, vento e papel. Evolução autoral do portfólio existente, mantendo as fotografias reais, os desenhos da artista, seis capítulos completos e o WhatsApp como contato principal.
 
-Site: https://cristianlf23.github.io/shimizu-portal/?v=4.14
+Site: https://cristianlf23.github.io/shimizu-portal/?v=4.15
 
 ## Executar
 
@@ -14,9 +14,11 @@ npm run check
 npm run build
 ```
 
-Abra http://127.0.0.1:4177/?v=4.14. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
+Abra http://127.0.0.1:4177/?v=4.15. A pasta `dist` contém a versão estática. Use HTTP; abrir o HTML por `file://` não executa módulos. GitHub Pages publica a branch `main`.
 
 ## Experiência
+
+- Inicialização mais leve: pontos do desenho preparados previamente; malhas das bandeiras preservadas em medições repetidas; dimensões da cena lidas uma vez por quadro de vento.
 
 - Assinatura principal 清水 em vetores de caligrafia, acompanhada por SHIMIZU. Cabeçalho, selo, entrada e favicon usam a mesma identidade; a entrada conserva a revelação progressiva sem flash inicial.
 
@@ -69,11 +71,11 @@ A assinatura utiliza contornos originais de Yuji Syuku (Yuji Project / Kinuta Fo
 O pacote de entrega inclui `qa`, `project-docs`, relatórios e capturas. Esses arquivos são ignorados no repositório público.
 
 ```text
-node qa/v4.14-qa.mjs
-node qa/desktop-v4.14-behavior.mjs
-node qa/typography-v4.14.mjs
-node qa/entrance-v4.14.mjs
-node qa/mobile-v4.14.mjs
+node qa/v4.15-qa.mjs
+node qa/cloth-behavior-v4.15.mjs
+node qa/typography-v4.15.mjs
+node qa/entrance-v4.15.mjs
+node qa/mobile-v4.15.mjs
 ```
 
 O primeiro roteiro confere 13 tamanhos entre 320 e 1920 px, seis capítulos, imagens, sobreposições, galerias, toque, teclado, histórico, resize, menu, WhatsApp, movimento reduzido e conteúdo sem JavaScript. O segundo verifica a pintura progressiva, avanço e retorno das etapas, pausa, menu, diálogo e movimento reduzido. Os relatórios de execução acompanham a entrega.
@@ -135,6 +137,6 @@ Escape, Tab e toque encerram a entrada. Movimento reduzido recebe somente fade d
 
 Correção da primeira pintura: selo e legenda com opacity0, nome com máscara100% e traço oculto são definidos no CSS antes do JavaScript. O traço só fica visível depois de configurar seu dash. Isso impede que a marca completa apareça antes de ser construída.
 
-## V4.14: rodapé mobile
+## V4.15: rodapé mobile
 
 O nome Shimizu do rodapé da dobra de Contato fica oculto até1000px, liberando a pintura fixa. TOPO permanece à direita. Logo do cabeçalho e rodapé desktop preservados. Cache do stylesheet atelier atualizado, sem alterar módulos ou motion.

@@ -9,8 +9,12 @@ export class ClothFlag {
   }
   resize(){
     if(!this.ready)return;
-    this.width=this.el.clientWidth;this.height=this.paper.clientHeight;if(!this.width||!this.height)return;
-    this.ratio=this.height/this.width;this.dpr=Math.min(devicePixelRatio||1,1.5);
+    const width=this.el.clientWidth,height=this.paper.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);
+    if(!width||!height)return;
+    // Fonts, image load and ResizeObserver may mount the same geometry repeatedly.
+    // Preserve the mesh and its velocity until the actual canvas size changes.
+    if(this.texture&&this.width===width&&this.height===height&&this.dpr===dpr)return;
+    this.width=width;this.height=height;this.ratio=height/width;this.dpr=dpr;
     this.canvas.width=Math.ceil(this.width*2*this.dpr);this.canvas.height=Math.ceil(this.height*1.15*this.dpr);
     const texture=document.createElement('canvas');texture.width=Math.ceil(this.width*2);texture.height=Math.ceil(this.height*2);
     const c=texture.getContext('2d');if(!c){this.ready=false;return;}

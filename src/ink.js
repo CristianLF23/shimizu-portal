@@ -1,3 +1,4 @@
+import {inkSamples} from './ink-samples.js?v=4.15';
 // Original brush drawing, revealed after the opening in five quiet stages.
 const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
 const noise=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
@@ -38,16 +39,11 @@ const strokes=[
  [5,1.2,'M207 136 Q226 124 241 132 M218 147 Q232 143 247 145'],
  [5,1,'M178 332 Q207 334 244 329 M194 339 L227 339'],
 ];
-function sample(d){
- const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',d);
- // Split subpaths so the dry brush never joins separate structural lines.
- return d.match(/M[^M]+/g).map(part=>{path.setAttribute('d',part);const length=path.getTotalLength(),n=Math.max(8,Math.ceil(length/2));return Array.from({length:n+1},(_,i)=>{const distance=length*i/n,p=path.getPointAtLength(distance),a=path.getPointAtLength(Math.max(0,distance-.5)),b=path.getPointAtLength(Math.min(length,distance+.5)),size=Math.hypot(b.x-a.x,b.y-a.y)||1;return{x:p.x,y:p.y,t:i/n,nx:-(b.y-a.y)/size,ny:(b.x-a.x)/size};});});
-}
 export class InkCompanion{
  constructor(canvas,scroller){
   this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:true});this.scroller=scroller;
   this.chapter=0;this.progress=0;this.target=0;this.paper=0;this.paperTarget=0;this.frame=0;this.last=0;this.lastDraw=0;this.time=0;this.drawCount=0;this.active=false;this.animate=true;
-  this.strokes=strokes.map(([stage,width,d],i)=>({stage:i===0?3:Math.max(0,stage-1),width,paths:sample(d),seed:i*17}));
+  this.strokes=strokes.map(([stage,width,d],i)=>({stage:i===0?3:Math.max(0,stage-1),width,paths:inkSamples[i].map(points=>points.map(([x,y,t,nx,ny])=>({x,y,t,nx,ny}))),seed:i*17}));
   this.strokes.forEach(s=>{const peers=this.strokes.filter(a=>a.stage===s.stage);s.count=peers.length;s.order=peers.indexOf(s);});
   this.boxes=[];this.protectUntil=0;this.lastProtect=0;this.tick=this.tick.bind(this);this.onResize=()=>{this.resize();this.protect();this.draw();};
   this.onScroll=()=>{if(this.measureFrame)return;this.measureFrame=requestAnimationFrame(()=>{this.measureFrame=0;this.protect();if(!this.animate)this.draw();});};

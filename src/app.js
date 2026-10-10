@@ -1,7 +1,7 @@
-import {chapters,works,whatsappNumber} from './content.js?v=4.14';
-import {WindSystem,motionConfig} from './wind.js?v=4.14';
-import {initAtelier} from './atelier.js?v=4.14';
-import {initEntrance} from './entrance.js?v=4.14';
+import {chapters,works,whatsappNumber} from './content.js?v=4.15';
+import {WindSystem,motionConfig} from './wind.js?v=4.15';
+import {initAtelier} from './atelier.js?v=4.15';
+import {initEntrance} from './entrance.js?v=4.15';
 
 const $=s=>document.querySelector(s);
 export const wind=new WindSystem($('.scene'));
